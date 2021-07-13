@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Mappers\" />
+    <Folder Include="Query\" />
+    <Folder Include="ConnectionStrings\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MaisEad.Dto\MaisEad.Dto.csproj" />
+    <ProjectReference Include="..\MaisEad.Entity\MaisEad.Entity.csproj" />
+  </ItemGroup>
+</Project>

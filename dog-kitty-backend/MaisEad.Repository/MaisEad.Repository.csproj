@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MySql.Data" Version="8.0.17" />
+    <PackageReference Include="Dapper" Version="1.60.6" />
+    <PackageReference Include="MySql.Web" Version="8.0.17" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Database\" />
+    <Folder Include="Repositories\" />
+    <Folder Include="Infraestruture\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MaisEad.Entity\MaisEad.Entity.csproj" />
+    <ProjectReference Include="..\MaisEad.Utils\MaisEad.Utils.csproj" />
+    <ProjectReference Include="..\MaisEad.Interface.Repository\MaisEad.Interface.Repository.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Class1.cs" />
+  </ItemGroup>
+</Project>
