@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Dto;
 using Entity;
 
-namespace Utils.Mappers
+namespace Business.Mappers
 {
     public class GatoMapper
     {

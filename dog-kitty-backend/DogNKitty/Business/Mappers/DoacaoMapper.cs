@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using Dto;
 using Entity;
 
-namespace Utils.Mappers
+namespace Business.Mappers
 {
     public class DoacaoMappers
     {
         private readonly GatoMapper gatoMapper = new GatoMapper();
         private readonly CachorroMapper cachorroMapper = new CachorroMapper();
-        private readonly FotoMapper fotoMapper = new FotoMapper();
         private readonly UsuarioMapper usuarioMapper = new UsuarioMapper();
         public DoacaoDto EntityToDto(Doacao doacao)
         {
@@ -19,8 +18,8 @@ namespace Utils.Mappers
                 Cachorro = cachorroMapper.EntityToDto(doacao.Cachorro),
                 Gato = gatoMapper.EntityToDto(doacao.Gato),
                 Localizacao = doacao.Localizacao,
-                Foto = fotoMapper.EntityToDto(doacao.Foto),
                 Usuario = usuarioMapper.EntityToDto(doacao.Usuario),
+                Descricao = doacao.Descricao
             };
         }
         public List<DoacaoDto> ListEntityToListDto(IEnumerable<Doacao> doacoes)
@@ -42,7 +41,7 @@ namespace Utils.Mappers
                 Cachorro = cachorroMapper.DtoToEntity(doacao.Cachorro),
                 Gato = gatoMapper.DtoToEntity(doacao.Gato),
                 Localizacao = doacao.Localizacao,
-                Foto = fotoMapper.DtoToEntity(doacao.Foto),
+                Descricao = doacao.Descricao,
                 Usuario = usuarioMapper.DtoToEntity(doacao.Usuario),
             };
         }

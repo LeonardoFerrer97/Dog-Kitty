@@ -9,8 +9,7 @@ namespace Entity
         public Cachorro Cachorro { get; set; }
         public string Localizacao { get; set; }
         public Usuario Usuario { get; set; }
-        public Foto Foto { get; set; }
-        public int QualidadeMaterial { get; set; }
+        public string Descricao { get; set; }
 
     }
 }

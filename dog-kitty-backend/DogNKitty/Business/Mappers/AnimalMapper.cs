@@ -3,17 +3,19 @@ using System.Collections.Generic;
 using Dto;
 using Entity;
 
-namespace Utils.Mappers
+namespace Business.Mappers
 {
     public class AnimalMapper
     {
-        public AnimalDto EntityToDto(Animal doacao)
+        private readonly FotoMapper fotoMapper = new FotoMapper();
+        public AnimalDto EntityToDto(Animal animal)
         {
             return new AnimalDto()
             {
-                Id = doacao.Id,
-                Nome = doacao.Nome,
-                Status = doacao.Status
+                Id = animal.Id,
+                Nome = animal.Nome,
+                Status = animal.Status,
+                Foto = fotoMapper.ListEntityToListDto(animal.Foto),
             };
         }
         public List<AnimalDto> ListEntityToListDto(IEnumerable<Animal> animais)
@@ -33,7 +35,8 @@ namespace Utils.Mappers
             {
                 Id = animal.Id,
                 Nome = animal.Nome,
-                Status = animal.Status
+                Status = animal.Status,
+                Foto = fotoMapper.ListDtoToListEntity(animal.Foto),
             };
         }
 

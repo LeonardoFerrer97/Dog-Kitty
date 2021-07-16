@@ -5,9 +5,6 @@ namespace Utils.Enums
     {
         Perdido,    
         Doacao,          
-        Procurase , 
-        Arts,           
-        BeautyCare,     
-        Fashion         
+        Procurase,    
     }
 }

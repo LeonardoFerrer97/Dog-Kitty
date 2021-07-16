@@ -7,13 +7,8 @@
 
 
   <ItemGroup>
-    <Folder Include="Mappers\" />
     <Folder Include="Queries\" />
     <Folder Include="Enums\" />
   </ItemGroup>
     
-  <ItemGroup>
-    <ProjectReference Include="..\Dto\Dto.csproj" />
-    <ProjectReference Include="..\Entity\Entity.csproj" />
-  </ItemGroup>
 </Project>

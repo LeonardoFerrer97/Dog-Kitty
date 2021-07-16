@@ -4,7 +4,7 @@ using System.Linq;
 using Dto;
 using Entity;
 using Repository;
-using Utils.Mappers;
+using Business.Mappers;
 using Utils.Query;
 
 namespace Business

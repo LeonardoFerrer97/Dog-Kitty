@@ -9,6 +9,6 @@ namespace Dto
         public UsuarioDto Usuario { get; set; }
         public GatoDto Gato { get; set; }
         public CachorroDto Cachorro { get; set; }
-        public FotoDto Foto { get; set; }
+        public string Descricao { get; set; }
     }
 }
