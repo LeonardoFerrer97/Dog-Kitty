@@ -39,9 +39,9 @@ namespace DogNKitty
                 c.SwaggerDoc("v1",
                     new OpenApiInfo
                     {
-                        Title = "DogNKitty",
+                        Title = "KittyNDoggy",
                         Version = "v1",
-                        Description = "API de Serviços do DogNKitty"
+                        Description = "API de Serviços do KittyNDoggy"
                     });
 
             });
@@ -76,7 +76,7 @@ namespace DogNKitty
 
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint(swagger, $"DogNKitty");
+                c.SwaggerEndpoint(swagger, $"KittyNDoggy");
             });
             app.UseHttpsRedirection();
         }
