@@ -38,12 +38,6 @@ namespace DogNKitty.Controllers
             return chatBusiness.GetChatById(id);
         }
 
-        [HttpGet("chat/{id}")]
-        public ActionResult<ChatDto> GetByDoacaoId(int id)
-        {
-            return chatBusiness.GetChatByDoacaoId(id);
-        }
-
         [HttpPost]
         public ActionResult<int> Post([FromBody] List<ChatDto> doacaos)
         {
