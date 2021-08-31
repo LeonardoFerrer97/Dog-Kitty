@@ -9,6 +9,7 @@ namespace Dto
         public string Email { get; set; }
         public string Contato { get; set; }
         public string Endereco { get; set; }
+        public UsuarioDto Usuario { get; set; }
         public List<DoacaoDto> Doacoes { get; set; }
     }
 }

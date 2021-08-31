@@ -1,7 +1,7 @@
 ﻿using System;
 namespace Dto
 {
-    public class RacaCachorroDto
+    public class RacaDto
     {
         public int Id { get; set; }
         public int Nome { get; set; }

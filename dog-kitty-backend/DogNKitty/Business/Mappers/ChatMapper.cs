@@ -12,7 +12,9 @@ namespace Business.Mappers
             return new ChatDto()
             {
                 Id = chat.Id,
-                Messages = mapper.ListEntityToListDto(chat.Messages)
+                Messages = mapper.ListEntityToListDto(chat.Messages),
+                Date = chat.Date,
+                Title = chat.Title
             };
         }
         public List<ChatDto> ListEntityToListDto(IEnumerable<Chat> chats)
@@ -31,7 +33,9 @@ namespace Business.Mappers
             return new Chat()
             {
                 Id = chat.Id,
-                Messages = mapper.ListDtoToListEntity(chat.Messages)
+                Messages = mapper.ListDtoToListEntity(chat.Messages),
+                Date = chat.Date,
+                Title = chat.Title
             };
         }
         public List<Chat> ListDtoToListEntity(IEnumerable<ChatDto> chats)

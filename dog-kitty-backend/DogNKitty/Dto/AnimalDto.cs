@@ -14,5 +14,7 @@ namespace Dto
         public int Idade { get; set; }
         public SexoEnum Sexo { get; set; }
         public PorteEnum Porte { get; set; }
+        public AnimalEnum TipoAnimal { get; set; }
+        public RacaDto Raca { get; set; }
     }
 }

@@ -9,6 +9,7 @@ namespace Entity
         public string Email { get; set; }
         public string Contato { get; set; }
         public string Endereco { get; set; }
+        public Usuario Usuario { get; set; }
         public List<Doacao> Doacoes { get; set; }
     }
 }

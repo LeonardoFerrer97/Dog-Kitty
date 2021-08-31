@@ -8,6 +8,7 @@ namespace Business.Mappers
     public class AnimalMapper
     {
         private readonly FotoMapper fotoMapper = new FotoMapper();
+        private readonly RacaMapper racaMapper = new RacaMapper();
         public AnimalDto EntityToDto(Animal animal)
         {
             return new AnimalDto()
@@ -16,6 +17,12 @@ namespace Business.Mappers
                 Nome = animal.Nome,
                 Status = animal.Status,
                 Foto = fotoMapper.ListEntityToListDto(animal.Foto),
+                Sexo = animal.Sexo,
+                Idade = animal.Idade,
+                Peso = animal.Peso,
+                Porte = animal.Porte,
+                Raca = racaMapper.EntityToDto(animal.Raca),
+                TipoAnimal = animal.TipoAnimal,
             };
         }
         public List<AnimalDto> ListEntityToListDto(IEnumerable<Animal> animais)
@@ -37,6 +44,12 @@ namespace Business.Mappers
                 Nome = animal.Nome,
                 Status = animal.Status,
                 Foto = fotoMapper.ListDtoToListEntity(animal.Foto),
+                Sexo = animal.Sexo,
+                Idade = animal.Idade,
+                Peso = animal.Peso,
+                Porte = animal.Porte,
+                Raca = racaMapper.DtoToEntity(animal.Raca),
+                TipoAnimal = animal.TipoAnimal,
             };
         }
 

@@ -6,6 +6,8 @@ namespace Entity
     public class Chat
     {
         public int Id { get; set; }
+        public string Title { get; set; }
         public List<ChatMessages> Messages { get; set; }
+        public DateTime Date { get; set; }
     }
 }

@@ -5,8 +5,7 @@ namespace Entity
     {
 
         public int Id { get; set; }
-        public Gato Gato { get; set; }
-        public Cachorro Cachorro { get; set; }
+        public Animal Animal { get; set; }
         public string Localizacao { get; set; }
         public Usuario Usuario { get; set; }
         public string Descricao { get; set; }

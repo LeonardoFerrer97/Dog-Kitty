@@ -7,19 +7,17 @@ namespace Business.Mappers
 {
     public class DoacaoMappers
     {
-        private readonly GatoMapper gatoMapper = new GatoMapper();
-        private readonly CachorroMapper cachorroMapper = new CachorroMapper();
         private readonly UsuarioMapper usuarioMapper = new UsuarioMapper();
+        private readonly AnimalMapper animalMappper = new AnimalMapper();
         public DoacaoDto EntityToDto(Doacao doacao)
         {
             return new DoacaoDto()
             {
                 Id = doacao.Id,
-                Cachorro = cachorroMapper.EntityToDto(doacao.Cachorro),
-                Gato = gatoMapper.EntityToDto(doacao.Gato),
                 Localizacao = doacao.Localizacao,
                 Usuario = usuarioMapper.EntityToDto(doacao.Usuario),
-                Descricao = doacao.Descricao
+                Descricao = doacao.Descricao,
+                Animal = animalMappper.EntityToDto(doacao.Animal)
             };
         }
         public List<DoacaoDto> ListEntityToListDto(IEnumerable<Doacao> doacoes)
@@ -38,11 +36,10 @@ namespace Business.Mappers
             return new Doacao()
             {
                 Id = doacao.Id,
-                Cachorro = cachorroMapper.DtoToEntity(doacao.Cachorro),
-                Gato = gatoMapper.DtoToEntity(doacao.Gato),
                 Localizacao = doacao.Localizacao,
                 Descricao = doacao.Descricao,
                 Usuario = usuarioMapper.DtoToEntity(doacao.Usuario),
+                Animal = animalMappper.DtoToEntity(doacao.Animal)
             };
         }
 
