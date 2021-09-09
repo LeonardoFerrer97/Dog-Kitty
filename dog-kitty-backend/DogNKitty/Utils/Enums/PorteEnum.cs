@@ -2,8 +2,8 @@
 {
     public enum PorteEnum
     {
-        Pequeno,
-        Medio,
-        Grande
+        Pequeno = 1,
+        Medio = 2,
+        Grande= 3
     }
 }

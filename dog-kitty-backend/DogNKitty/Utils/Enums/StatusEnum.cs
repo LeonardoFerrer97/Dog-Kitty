@@ -3,8 +3,8 @@ namespace Utils.Enums
 {
     public enum StatusEnum
     {
-        Perdido,    
-        Doacao,          
-        Procurase,    
+        Perdido = 1,    
+        Doacao = 2 ,          
+        Procurase=3,    
     }
 }

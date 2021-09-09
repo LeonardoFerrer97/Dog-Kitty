@@ -5,6 +5,7 @@ using Dapper;
 using Entity;
 using IRepository;
 using Npgsql;
+using Utils.Enums;
 using Utils.Queries;
 
 namespace Repository
@@ -48,12 +49,41 @@ namespace Repository
                 return result;
             }
         }
-        public List<Animal> GetAnimal()
+        public List<Animal> GetAnimal(string nome,StatusEnum? status, double? peso,int? idade,SexoEnum? sexo, PorteEnum? porte, AnimalEnum? tipoAnimal)
         {
             using (conn)
             {
+                string query = AnimalQueries.GET_ANIMAL;
+                if (nome != null && nome.Length > 0)
+                {
+                    query += " AND a.nome = '" + nome +"'";
+                }
+                if (status.HasValue)
+                {
+                    query += " AND a.status = '" + (int)status.Value + "'";
+                }
+                if (peso.HasValue)
+                {
+                    query += " AND a.peso = '" + peso.Value + "'";
+                }
+                if (idade.HasValue)
+                {
+                    query += " AND a.idade = '" + idade.Value + "'";
+                }
+                if (sexo.HasValue)
+                {
+                    query += " AND a.sexo = '" + (int)sexo.Value + "'";
+                }
+                if (porte.HasValue)
+                {
+                    query += " AND a.porte = '" + (int)porte.Value + "'";
+                }
+                if (tipoAnimal.HasValue)
+                {
+                    query += " AND tipoanimal = '" + (int)tipoAnimal.Value;
+                }
                 var dictionaryAnimal = new Dictionary<int, Animal>();
-                var result = conn.Query<Animal, Foto, Raca, Animal>(AnimalQueries.GET_ANIMAL, (a, f, r) =>
+                var result = conn.Query<Animal, Foto, Raca, Animal>(query, (a, f, r) =>
                 {
                     if (!dictionaryAnimal.TryGetValue(a.Id, out Animal aEntry))
                     {

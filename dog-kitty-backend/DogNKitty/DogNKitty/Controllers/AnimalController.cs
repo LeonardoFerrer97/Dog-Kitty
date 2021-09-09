@@ -27,9 +27,9 @@ namespace DogNKitty.Controllers
 
 
         [HttpGet]
-        public ActionResult<IEnumerable<AnimalDto>> Get()
+        public ActionResult<IEnumerable<AnimalDto>> Get(string nome, StatusEnum? status, double? peso, int? idade, SexoEnum? sexo, PorteEnum? porte, AnimalEnum? tipoAnimal)
         {
-            return animalBusiness.GetAllAnimals();
+            return animalBusiness.GetAllAnimals(nome, status, peso, idade, sexo, porte, tipoAnimal);
         }
 
 

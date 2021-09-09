@@ -1,7 +1,7 @@
 ﻿namespace Utils.Enums {
     public enum AnimalEnum
     {
-        Cachorro,
-        Gato
+        Cachorro= 1,
+        Gato = 2
     }
 }

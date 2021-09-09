@@ -8,6 +8,7 @@ using Business.Mappers;
 using Utils.Query;
 using Utils.Queries;
 using IRepository;
+using Utils.Enums;
 
 namespace Business
 {
@@ -24,9 +25,9 @@ namespace Business
         }
 
 
-        public List<AnimalDto> GetAllAnimals()
+        public List<AnimalDto> GetAllAnimals(string nome, StatusEnum? status, double? peso, int? idade, SexoEnum? sexo, PorteEnum? porte, AnimalEnum? tipoAnimal)
         {
-            IEnumerable<Animal> animals = animalRepositoryCustom.GetAnimal();
+            IEnumerable<Animal> animals = animalRepositoryCustom.GetAnimal(nome, status, peso,idade, sexo,porte, tipoAnimal);
 
             List<AnimalDto> avaliacoesUsuario = mapper.ListEntityToListDto(animals);
             return avaliacoesUsuario;
