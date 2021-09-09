@@ -22,7 +22,7 @@ namespace Repository.Infraestruture
             this.characterParameter = characterParameter.ToString();
 
             properties = type.GetProperties();
-            propertiesNames = properties.Where(a => !IsComplexType(a)).Select(a => a.Name).ToArray();
+            propertiesNames = properties.Where(a => !IsComplexType(a) && a.Name != "Id").Select(a => a.Name).ToArray();
             typeName = type.Name;
         }
 
@@ -30,7 +30,7 @@ namespace Repository.Infraestruture
         {
             var result = string.Empty;
 
-            var sb = new StringBuilder($"INSERT INTO {typeName} (");
+            var sb = new StringBuilder($"INSERT INTO kittydoggy.{typeName.ToLower()} (");
 
             var propertiesNamesDef = propertiesNames.Where(a => a != identityField).ToArray();
 
@@ -55,13 +55,13 @@ namespace Repository.Infraestruture
 
             var sb = new StringBuilder("SELECT ");
 
-            string separator = $",{Environment.NewLine}";
+            string separator = $",";
 
             string selectPart = string.Join(separator, propertiesNames);
 
             sb.AppendLine(selectPart);
 
-            string fromPart = $"FROM {typeName}";
+            string fromPart = $"FROM kittydoggy.{typeName.ToLower()}";
 
             sb.Append(fromPart);
 
@@ -75,7 +75,7 @@ namespace Repository.Infraestruture
 
             var where = GenerateWhere(parameters);
 
-            var result = $"DELETE FROM {typeName} {where} ";
+            var result = $"DELETE FROM kittydoggy.{typeName.ToLower()} {where} ";
 
             return result;
         }
@@ -85,7 +85,7 @@ namespace Repository.Infraestruture
 
             var pksFields = pks.GetType().GetProperties().Select(a => a.Name).ToArray();
 
-            var sb = new StringBuilder($"UPDATE {typeName} SET ");
+            var sb = new StringBuilder($"UPDATE kittydoggy.{typeName.ToLower()} SET ");
 
             var propertiesNamesDef = propertiesNames.Where(a => !pksFields.Contains(a)).ToArray();
 

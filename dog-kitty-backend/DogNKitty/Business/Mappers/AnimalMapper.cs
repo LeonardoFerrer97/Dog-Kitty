@@ -16,12 +16,12 @@ namespace Business.Mappers
                 Id = animal.Id,
                 Nome = animal.Nome,
                 Status = animal.Status,
-                Foto = fotoMapper.ListEntityToListDto(animal.Foto),
+                Foto = fotoMapper.ListEntityToListDto(animal?.Foto),
                 Sexo = animal.Sexo,
                 Idade = animal.Idade,
                 Peso = animal.Peso,
                 Porte = animal.Porte,
-                Raca = racaMapper.EntityToDto(animal.Raca),
+                Raca = racaMapper.EntityToDto(animal?.Raca),
                 TipoAnimal = animal.TipoAnimal,
             };
         }

@@ -7,7 +7,7 @@ namespace Entity
     public class Animal
     {
         public int Id { get; set; }
-        public int Nome { get; set; }
+        public string Nome { get; set; }
         public StatusEnum Status { get; set; }
         public List<Foto> Foto { get; set; }
         public double Peso { get; set; }

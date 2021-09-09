@@ -7,6 +7,7 @@ using Repository;
 using Business.Mappers;
 using Utils.Query;
 using Utils.Queries;
+using IRepository;
 
 namespace Business
 {
@@ -14,16 +15,18 @@ namespace Business
     {
         private readonly AnimalMapper mapper = new AnimalMapper();
         private readonly Repository<Animal> animalRepository;
+        private readonly IAnimalRepository animalRepositoryCustom;
 
         public AnimalBusiness(string connection)
         {
             animalRepository = new Repository<Animal>(connection);
+            animalRepositoryCustom = new AnimalRepository(connection);
         }
 
 
         public List<AnimalDto> GetAllAnimals()
         {
-            IEnumerable<Animal> animals = animalRepository.All();
+            IEnumerable<Animal> animals = animalRepositoryCustom.GetAnimal();
 
             List<AnimalDto> avaliacoesUsuario = mapper.ListEntityToListDto(animals);
             return avaliacoesUsuario;
@@ -36,10 +39,9 @@ namespace Business
             return mapper.ListEntityToListDto(doacoes.ToList());
         }
 
-        public AnimalDto GetAnimalById(int Id)
+        public AnimalDto GetAnimalById(int id)
         {
-            object parameters = new { Id };
-            Animal animals = animalRepository.GetData(AnimalQueries.GET_ANIMAL_BY_FILTER, parameters).FirstOrDefault();
+            Animal animals = animalRepositoryCustom.GetAnimalById(id);
 
             AnimalDto animal = mapper.EntityToDto(animals);
             return animal;
@@ -47,12 +49,12 @@ namespace Business
 
         public int UpdateAnimal(AnimalDto Animal)
         {
-            return animalRepository.InstertOrUpdate(mapper.DtoToEntity(Animal), new { AnimalId = Animal.Id });
+            return animalRepository.InstertOrUpdate(mapper.DtoToEntity(Animal), new { id = Animal.Id });
         }
 
-        public void DeleteAnimalById(int AnimalId)
+        public void DeleteAnimalById(int id)
         {
-            animalRepository.Remove(new { AnimalId });
+            animalRepository.Remove(new { id });
         }
 
 

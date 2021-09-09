@@ -1,6 +1,8 @@
 ﻿using System;
 using MySql.Data;
 using MySql.Data.MySqlClient;
+using Npgsql;
+
 namespace Repository
 {
     public class DBConnection
@@ -9,7 +11,7 @@ namespace Repository
         {
         }
 
-        private string databaseName = "DogNKitty";
+        private string databaseName = "denu3og6hclbt2";
         public string DatabaseName
         {
             get { return databaseName; }
@@ -17,8 +19,8 @@ namespace Repository
         }
 
         public string Password { get; set; }
-        private MySqlConnection connection = null;
-        public MySqlConnection Connection
+        private NpgsqlConnection connection = null;
+        public NpgsqlConnection Connection
         {
             get { return connection; }
         }
@@ -37,8 +39,8 @@ namespace Repository
             {
                 if (String.IsNullOrEmpty(databaseName))
                     return false;
-                string connstring = string.Format("Server=localhost; database={0}; UID=root; password=leoraposao", databaseName);
-                connection = new MySqlConnection(connstring);
+                string connstring ="Server=ec2-52-2-118-38.compute-1.amazonaws.com;DataBase=denu3og6hclbt2;Uid=ajdrmyhilrvkcd;Pwd=a0112efb9736444dda1d72b71344bb830ef9c770b338df544bd32a9ff835366f;";
+                connection = new NpgsqlConnection(connstring);
                 connection.Open();
             }
 

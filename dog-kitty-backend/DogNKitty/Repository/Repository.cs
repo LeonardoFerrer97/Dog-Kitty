@@ -12,6 +12,8 @@ using IRepository;
 using Utils;
 using MySql.Data.MySqlClient;
 using Repository.Infraestruture;
+using Npgsql;
+using System.Transactions;
 
 namespace Repository
 {
@@ -37,7 +39,7 @@ namespace Repository
         protected string qryInsert { get; set; }
 
 
-
+        public string connectionString;
         private string identityField;
 
 
@@ -49,7 +51,8 @@ namespace Repository
         public Repository(string connection, char parameterIdentified = '@')
         {
 
-            conn = new MySqlConnection(connection);
+            conn = new NpgsqlConnection(connection);
+            connectionString = connection;
             ParameterIdentified = parameterIdentified;
             partsQryGenerator = new PartsQryGenerator<TEntity>(ParameterIdentified);
             identityInspector = new IDentityInspector<TEntity>(conn);
@@ -86,11 +89,9 @@ namespace Repository
 
         public IEnumerable<TEntity> All()
         {
-            CreateSelectQry();
-
-            IEnumerable<TEntity> result = conn.Query<TEntity>(qrySelect);
-
-            return result;
+                CreateSelectQry();
+                IEnumerable<TEntity> result = SqlMapper.Query<TEntity>(conn, qrySelect);
+                return result;
 
         }
 
@@ -412,43 +413,7 @@ namespace DogNKitty.Repository.Repositories
                 return result;
             }
         }
-        public Curso GetCursoById(int id)
-        {
-            using (conn)
-            {
-                var dictionaryCurso = new Dictionary<int, Curso>();
-                var result = conn.Query<Curso, Faculdade, Comentario, AvaliacaoUsuario,TipoCurso, Curso>(String.Format(CursoQueries.GET_ALL_CURSOS_BY_ID,id), (cu, fa, co, avu,ti) =>
-                {
-                    if (!dictionaryCurso.TryGetValue(cu.Id, out Curso cuEntry))
-                    {
-                        cuEntry = cu;
-                        cuEntry.Comentarios = new List<Comentario>();
-                        dictionaryCurso.Add(cuEntry.Id, cuEntry);
-                    }
-                    if (fa != null)
-                    {
-                        cuEntry.Faculdade = fa;
-                    }
-                    if(ti!=null)
-                    {
-                        cuEntry.TipoCurso = ti;
-                    }
-                    if (co != null)
-                    {
-                        if (!cuEntry.Comentarios.Any(x => x.ComentarioId == co.ComentarioId))
-                            cuEntry.Comentarios.Add(co);
-                    }
-                    if (avu != null)
-                    {
-                        cuEntry.AvaliacaoUsuarios = avu;
-                    }
-                    return cuEntry;
-                }, null, splitOn: "FaculId,ComentarioId,AvaliacaoUsuarioId,IdTipo")
-                .Distinct()
-                .FirstOrDefault();
-                return result;
-            }
-        }
+       
     }
 }
 

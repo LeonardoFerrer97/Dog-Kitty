@@ -9,13 +9,18 @@
   <ItemGroup>
     <PackageReference Include="MySql.Data" Version="8.0.25" />
     <PackageReference Include="Dapper" Version="2.0.90" />
+    <PackageReference Include="Npgsql" Version="5.0.7" />
   </ItemGroup> 
     <ItemGroup>
     <ProjectReference Include="..\IRepository\IRepository.csproj" />
     <ProjectReference Include="..\Utils\Utils.csproj" />
+    <ProjectReference Include="..\Entity\Entity.csproj" />
   </ItemGroup>
 
     <ItemGroup>
       <Folder Include="Infraestruture\" />
+    </ItemGroup>
+    <ItemGroup>
+      <None Remove="Npgsql" />
     </ItemGroup>
 </Project>

@@ -33,15 +33,17 @@ namespace DogNKitty
             // Add our Config object so it can be injected
             services.Configure<ConnectionStrings>(Configuration.GetSection("ConnectionStrings"));
             services.AddCors();
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+            services.AddMvc(options => options.EnableEndpointRouting = false).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+
             services.AddSwaggerGen(c =>
             {
+
                 c.SwaggerDoc("v1",
                     new OpenApiInfo
                     {
                         Title = "KittyNDoggy",
                         Version = "v1",
-                        Description = "API de Serviços do KittyNDoggy"
+                        Description = "API de Serviços do KittyNDoggy",
                     });
 
             });
@@ -79,6 +81,7 @@ namespace DogNKitty
                 c.SwaggerEndpoint(swagger, $"KittyNDoggy");
             });
             app.UseHttpsRedirection();
+            app.UseMvc();
         }
     }
 }
