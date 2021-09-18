@@ -27,13 +27,6 @@ namespace Business
             return avaliacoesUsuario;
         }
 
-        public UsuarioDto GetUsuarioByDoacaoId(int CursoIdAvaliacao)
-        {
-            object parameters = new { CursoIdAvaliacao };
-            Usuario usuarios = usuarioRepository.GetData("", parameters).FirstOrDefault();
-            return mapper.EntityToDto(usuarios);
-        }
-
         public UsuarioDto GetUsuarioById(int Id)
         {
             object parameters = new { Id };
@@ -59,9 +52,9 @@ namespace Business
         }
 
 
-        public int InsertUsuario(List<UsuarioDto> Usuario)
+        public int InsertUsuario(UsuarioDto Usuario)
         {
-            return usuarioRepository.Add(mapper.ListDtoToListEntity(Usuario));
+            return usuarioRepository.Add(mapper.DtoToEntity(Usuario));
         }
 
 

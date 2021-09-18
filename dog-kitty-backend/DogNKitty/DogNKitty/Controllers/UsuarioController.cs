@@ -38,16 +38,10 @@ namespace DogNKitty.Controllers
             return usuarioBusiness.GetUsuarioById(id);
         }
 
-        [HttpGet("usuario/{id}")]
-        public ActionResult<UsuarioDto> GetByDoacaoId(int id)
-        {
-            return usuarioBusiness.GetUsuarioByDoacaoId(id);
-        }
-
         [HttpPost]
-        public ActionResult<int> Post([FromBody] List<UsuarioDto> doacaos)
+        public ActionResult<int> Post([FromBody]UsuarioDto usuario)
         {
-            return usuarioBusiness.InsertUsuario(doacaos);
+            return usuarioBusiness.InsertUsuario(usuario);
         }
 
         [HttpPut()]

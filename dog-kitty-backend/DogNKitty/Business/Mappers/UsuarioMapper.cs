@@ -13,7 +13,8 @@ namespace Business.Mappers
                     Id = usuario.Id,
                     Contato = usuario.Contato,
                     Email = usuario.Email,
-                    Endereco =usuario.Endereco
+                    Endereco =usuario.Endereco,
+                    IsAdmin = usuario.IsAdmin
                 };
             }
             public List<UsuarioDto> ListEntityToListDto(IEnumerable<Usuario> usuarios)
@@ -34,7 +35,8 @@ namespace Business.Mappers
                     Id = usuario.Id,
                     Contato = usuario.Contato,
                     Email = usuario.Email,
-                    Endereco = usuario.Endereco
+                    Endereco = usuario.Endereco,
+                    IsAdmin = usuario.IsAdmin
                 };
             }
 

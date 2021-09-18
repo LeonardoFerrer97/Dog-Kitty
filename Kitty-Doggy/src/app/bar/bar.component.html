@@ -1,0 +1,14 @@
+<div class="bar">
+    <p class="text" (click)="onClickText()">KittyNDoggy</p>
+    <p class="text" (click)="onClickText()">Adoção</p>
+    <p class="text" (click)="onClickText()">Pets Perdidos</p>
+    <p class="text" (click)="onClickText()">Forúm</p>
+    <button class="icon" mat-icon-button [matMenuTriggerFor]="menu" >
+        <mat-icon>account_circle</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu" overlapTrigger="false" xPosition="before">
+          <button (click)="Login()"  mat-menu-item>Login
+          </button>
+        </mat-menu>
+</div>
+
