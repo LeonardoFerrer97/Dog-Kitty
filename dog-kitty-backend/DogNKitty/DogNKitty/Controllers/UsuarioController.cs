@@ -38,6 +38,12 @@ namespace DogNKitty.Controllers
             return usuarioBusiness.GetUsuarioById(id);
         }
 
+        [HttpGet("email/{email}")]
+        public ActionResult<UsuarioDto> GetByEmail(string email)
+        {
+            return usuarioBusiness.GetUsuarioByEmail(email);
+        }
+
         [HttpPost]
         public ActionResult<int> Post([FromBody]UsuarioDto usuario)
         {

@@ -30,11 +30,24 @@ namespace Business
         public UsuarioDto GetUsuarioById(int Id)
         {
             object parameters = new { Id };
-            Usuario usuario = usuarioRepository.GetData("", parameters).FirstOrDefault();
-
+            Usuario usuario = usuarioRepository.GetData( parameters).FirstOrDefault();
+            if (usuario == null)
+            {
+                return null;
+            }
             return mapper.EntityToDto(usuario);
         }
-
+        
+        public UsuarioDto GetUsuarioByEmail(string Email)
+        {
+            object parameters = new { Email };
+            Usuario usuario = usuarioRepository.GetData(parameters).FirstOrDefault();
+            if(usuario == null)
+            {
+                return null;
+            }
+            return mapper.EntityToDto(usuario);
+        }
         public int UpdateUsuario(UsuarioDto Usuario)
         {
             return usuarioRepository.InstertOrUpdate(mapper.DtoToEntity(Usuario), new { DoacaoId = Usuario.Id });

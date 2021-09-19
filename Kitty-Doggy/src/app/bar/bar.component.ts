@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
+import { AuthService } from '@auth0/auth0-angular';
+import { Usuario } from 'src/domain/usuario';
+import { UserService } from '../services/user.service';
+
 @Component({
   selector: 'app-bar',
   templateUrl: './bar.component.html',
@@ -7,27 +11,40 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BarComponent implements OnInit {
 
-  selectDisplay = 'none';
+  isLoggedIn=false;
+  constructor(public auth: AuthService,public userService: UserService) {}
 
-  constructor() { }
+  ngOnInit(): void {    
+    this.auth.user$.subscribe(
+    (profile) => {
+      console.log(profile)
+    if(profile!=null){
+      this.isLoggedIn=true;
+    this.userService.getUserByEmail(profile?.email).subscribe((user)=>{
+      if(!user){
+        var newUser = new Usuario();
+        newUser.Email = profile?.email;
+        newUser.IsAdmin = false;
+        this.userService.createUser(newUser).subscribe();
 
-  ngOnInit(): void {
+      }
+    });
+  }    
+    }
+  );
   }
 
   onClickText(){
     
   }
-  onClickIcon(){
-    if(this.selectDisplay = ''){
-      this.selectDisplay = 'none';
-    }
-    if(this.selectDisplay = 'none'){
-      this.selectDisplay = '';
-    }
-  }
-
+  Logout(){
+    this.auth.logout({ returnTo: document.location.origin })
+  }  
   Login(){
-    
-  }
+  
+    this.auth.loginWithRedirect(); 
 
+
+
+  }
 }

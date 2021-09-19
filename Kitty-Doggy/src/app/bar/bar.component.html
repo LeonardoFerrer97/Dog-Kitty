@@ -7,8 +7,18 @@
         <mat-icon>account_circle</mat-icon>
       </button>
       <mat-menu #menu="matMenu" overlapTrigger="false" xPosition="before">
-          <button (click)="Login()"  mat-menu-item>Login
-          </button>
+        <button *ngIf="!isLoggedIn" (click)="Login()"  mat-menu-item>Login
+        </button>
+        <button *ngIf="isLoggedIn" (click)="onClickText()"  mat-menu-item>Atualizar dados
+        </button>
+        <button *ngIf="isLoggedIn" (click)="onClickText()"  mat-menu-item>Criar local de adoção
+        </button>
+        <button *ngIf="isLoggedIn" (click)="onClickText()"  mat-menu-item>Postar adoção
+        </button>
+        <button *ngIf="isLoggedIn" (click)="onClickText()"  mat-menu-item>Postar pet perdido
+        </button>
+        <button *ngIf="isLoggedIn" (click)="Logout()"  mat-menu-item>Logout
+        </button>
         </mat-menu>
 </div>
 

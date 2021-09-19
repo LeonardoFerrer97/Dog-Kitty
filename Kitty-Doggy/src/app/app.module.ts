@@ -6,6 +6,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BarComponent } from './bar/bar.component';import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { HttpClientModule } from '@angular/common/http';
+import { UserService } from './services/user.service';    
+import { AuthModule, AuthService } from '@auth0/auth0-angular';
 
 @NgModule({
   declarations: [
@@ -18,8 +21,12 @@ import { BarComponent } from './bar/bar.component';import { BrowserAnimationsMod
     MatIconModule,
     BrowserAnimationsModule,
     MatMenuModule,
+    AuthModule.forRoot({
+      domain: 'dev-d1olx9ru.auth0.com',
+      clientId: 'wnK9bKI1imlksxrkvuyVUM8fQ1zlL6uu'
+    }),HttpClientModule
   ],
-  providers: [],
+  providers: [AuthService,UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
