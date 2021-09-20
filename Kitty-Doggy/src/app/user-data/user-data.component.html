@@ -1,0 +1,33 @@
+<form class="container" (ngSubmit)="onSubmit(formUser)" [formGroup]="formUser" >
+
+    <div style="grid-area: nome;" class="normalForm form-group">
+      <label for="nome">Nome</label>
+      <input type="text" class="form-control" [formControlName]="'nome'" id="nome" [value]="user.nome" >
+    </div>
+  
+    <div style="grid-area: email;" class="normalForm form-group">
+      <label for="email">E-mail</label>
+
+      <input type="text" class="form-control"  id="email" [value]="user.email" disabled>
+    </div>
+  
+    <div style="grid-area: contato;" class="normalForm form-group">
+      <label for="contato">Contato</label>
+      <input type="text" class="form-control" [formControlName]="'contato'" id="contato" [value]="user.contato">
+    </div>
+  
+    <div style="grid-area: endereco;" class="normalForm form-group">
+      <label for="endereco">Endereço</label>
+      <input type="text" class="form-control" [formControlName]="'endereco'" id="endereco" [value]="user.endereco">
+    </div>
+  
+    <div style="grid-area: isAdmin;" class="normalForm form-group">
+        <label for="isAdmin">Administrador</label>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" id="isAdmin" [value]="user.isAdmin" disabled>
+        </div>
+    </div>
+  
+    <button style="grid-area: submit;" type="submit" class="btn btn-primary mt-4" value="Salvar"></button>
+  
+  </form>

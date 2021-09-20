@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { AuthService } from '@auth0/auth0-angular';
 import { Usuario } from 'src/domain/usuario';
@@ -10,14 +11,13 @@ import { UserService } from '../services/user.service';
   styleUrls: ['./bar.component.css']
 })
 export class BarComponent implements OnInit {
-
+  user:Usuario | undefined;
   isLoggedIn=false;
-  constructor(public auth: AuthService,public userService: UserService) {}
+  constructor(public auth: AuthService,public userService: UserService, public router:Router) {}
 
   ngOnInit(): void {    
     this.auth.user$.subscribe(
     (profile) => {
-      console.log(profile)
     if(profile!=null){
       this.isLoggedIn=true;
     this.userService.getUserByEmail(profile?.email).subscribe((user)=>{
@@ -25,8 +25,11 @@ export class BarComponent implements OnInit {
         var newUser = new Usuario();
         newUser.Email = profile?.email;
         newUser.IsAdmin = false;
+        newUser.Nome = profile?.name;
         this.userService.createUser(newUser).subscribe();
-
+        this.user=newUser;
+      }else{
+       this.user = user;
       }
     });
   }    
@@ -34,7 +37,10 @@ export class BarComponent implements OnInit {
   );
   }
 
-  onClickText(){
+  onClickText(click:string){
+    if(click="updatedata"){
+      this.router.navigate(["user-data"],{state:{user:this.user}});   
+     }
     
   }
   Logout(){

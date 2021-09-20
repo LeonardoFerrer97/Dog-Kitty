@@ -26,7 +26,7 @@ public getUserById(id: number){
   return this.httpClient.get<Usuario[]>(`${this.apiURL}/${id}`);
 }
 public getUserByEmail(email?: string){
-  return this.httpClient.get<Usuario[]>(`${this.apiURL}/email/${email}`);
+  return this.httpClient.get<Usuario>(`${this.apiURL}/email/${email}`);
 }
 
 public getUsers(url?: string){

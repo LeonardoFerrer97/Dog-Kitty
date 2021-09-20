@@ -50,14 +50,8 @@ namespace Business
         }
         public int UpdateUsuario(UsuarioDto Usuario)
         {
-            return usuarioRepository.InstertOrUpdate(mapper.DtoToEntity(Usuario), new { DoacaoId = Usuario.Id });
+            return usuarioRepository.InstertOrUpdate(mapper.DtoToEntity(Usuario), new { email = Usuario.Email });
         }
-
-        public void DeleteDoacaoById(int DoacaoId)
-        {
-            usuarioRepository.Remove(new { DoacaoId });
-        }
-
 
         public void DeleteUsuarioById(int Id)
         {

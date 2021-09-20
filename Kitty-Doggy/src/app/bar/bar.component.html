@@ -1,21 +1,21 @@
 <div class="bar">
-    <p class="text" (click)="onClickText()">KittyNDoggy</p>
-    <p class="text" (click)="onClickText()">Adoção</p>
-    <p class="text" (click)="onClickText()">Pets Perdidos</p>
-    <p class="text" (click)="onClickText()">Forúm</p>
+    <p class="text" (click)="onClickText('aa')">KittyNDoggy</p>
+    <p class="text" (click)="onClickText('aa')">Adoção</p>
+    <p class="text" (click)="onClickText('aa')">Pets Perdidos</p>
+    <p class="text" (click)="onClickText('aa')">Forúm</p>
     <button class="icon" mat-icon-button [matMenuTriggerFor]="menu" >
         <mat-icon>account_circle</mat-icon>
       </button>
       <mat-menu #menu="matMenu" overlapTrigger="false" xPosition="before">
         <button *ngIf="!isLoggedIn" (click)="Login()"  mat-menu-item>Login
         </button>
-        <button *ngIf="isLoggedIn" (click)="onClickText()"  mat-menu-item>Atualizar dados
+        <button *ngIf="isLoggedIn" (click)="onClickText('updatedata')"  mat-menu-item>Atualizar dados
         </button>
-        <button *ngIf="isLoggedIn" (click)="onClickText()"  mat-menu-item>Criar local de adoção
+        <button *ngIf="isLoggedIn" (click)="onClickText('createlocal')"  mat-menu-item>Criar local de adoção
         </button>
-        <button *ngIf="isLoggedIn" (click)="onClickText()"  mat-menu-item>Postar adoção
+        <button *ngIf="isLoggedIn" (click)="onClickText('createadoption')"  mat-menu-item>Postar adoção
         </button>
-        <button *ngIf="isLoggedIn" (click)="onClickText()"  mat-menu-item>Postar pet perdido
+        <button *ngIf="isLoggedIn" (click)="onClickText('createlost')"  mat-menu-item>Postar pet perdido
         </button>
         <button *ngIf="isLoggedIn" (click)="Logout()"  mat-menu-item>Logout
         </button>

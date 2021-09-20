@@ -1,0 +1,23 @@
+.container {
+    display: grid;
+margin-top: 70px;
+  grid-template-columns: 15% 70% 15%;
+  grid-template-rows: 5% 15% 15% 15% 15% 15% 20%; 
+  grid-template-areas: 
+  "a b m"
+  "r nome  n"
+  "e email o "
+  "f contato p"
+  "i endereco w "
+  "t isAdmin  w"
+  "c submit  d";
+
+    min-height: 80vh;
+    width: 100vw;
+  }
+
+  .normalForm{
+
+    justify-self: left;
+    align-self: center;
+  }

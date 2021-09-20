@@ -1,0 +1,51 @@
+.container {
+    display: grid;
+
+  grid-template-columns: 20% 60% 20%;
+  grid-template-rows: 70% 25% 5%; 
+  grid-template-areas: 
+    "header mid  "
+    "main mid2 "
+    "footer mid3  ";
+    margin-top: 70px;
+
+    min-height: 80vh;
+    width: 100vw;
+  }
+
+  .logo{
+      grid-area: mid;
+      justify-self: center;
+      align-self: center;
+      max-height: 90%;
+      max-width: 85%;
+}
+.welcome{
+    grid-area: mid2;
+    font-family: Oswald;
+font-style: normal;
+font-weight: normal;
+font-size: 48px;
+line-height: 71px;
+text-align: center;
+
+margin-top: 0px;
+margin-bottom: 0px;
+justify-self: center;
+align-self: center;
+color: #FE5F55;
+}
+
+.support{
+    grid-area: mid3;
+    font-family: Oswald;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 27px;
+    text-align: center;
+    
+    color: #F6AE2D;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
