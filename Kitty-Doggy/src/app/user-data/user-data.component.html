@@ -21,13 +21,14 @@
       <input type="text" class="form-control" [formControlName]="'endereco'" id="endereco" [value]="user.endereco">
     </div>
   
-    <div style="grid-area: isAdmin;" class="normalForm form-group">
+    <div style="grid-area: isAdmin;
+    width: 5%;" class="normalForm form-group">
         <label for="isAdmin">Administrador</label>
         <div class="form-check">
-          <input class="form-check-input" type="radio" id="isAdmin" [value]="user.isAdmin" disabled>
+          <input class="form-check-input" type="radio" id="isAdmin" [checked]="user.isAdmin" disabled>
         </div>
     </div>
   
-    <button style="grid-area: submit;" type="submit" class="btn btn-primary mt-4" value="Salvar"></button>
+    <button style="grid-area: submit;" type="submit" class="btn btn-primary mt-4" value="Salvar"> Salvar</button>
   
   </form>

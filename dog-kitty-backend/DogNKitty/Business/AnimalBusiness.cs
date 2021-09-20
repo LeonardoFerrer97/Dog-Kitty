@@ -25,9 +25,9 @@ namespace Business
         }
 
 
-        public List<AnimalDto> GetAllAnimals(string nome, StatusEnum? status, double? peso, int? idade, SexoEnum? sexo, PorteEnum? porte, AnimalEnum? tipoAnimal)
+        public List<AnimalDto> GetAllAnimals(string nome, int? doacaoId,int? raca_id, StatusEnum? status, double? peso, int? idade, SexoEnum? sexo, PorteEnum? porte, AnimalEnum? tipoAnimal)
         {
-            IEnumerable<Animal> animals = animalRepositoryCustom.GetAnimal(nome, status, peso,idade, sexo,porte, tipoAnimal);
+            IEnumerable<Animal> animals = animalRepositoryCustom.GetAnimal(nome, doacaoId,raca_id,status, peso,idade, sexo,porte, tipoAnimal);
 
             List<AnimalDto> avaliacoesUsuario = mapper.ListEntityToListDto(animals);
             return avaliacoesUsuario;

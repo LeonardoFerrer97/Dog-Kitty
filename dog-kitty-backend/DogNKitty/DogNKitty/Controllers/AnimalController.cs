@@ -27,9 +27,9 @@ namespace DogNKitty.Controllers
 
 
         [HttpGet]
-        public ActionResult<IEnumerable<AnimalDto>> Get(string nome, StatusEnum? status, double? peso, int? idade, SexoEnum? sexo, PorteEnum? porte, AnimalEnum? tipoAnimal)
+        public ActionResult<IEnumerable<AnimalDto>> Get(string nome, int? doacaoId,int? racaId,StatusEnum? status, double? peso, int? idade, SexoEnum? sexo, PorteEnum? porte, AnimalEnum? tipoAnimal)
         {
-            return animalBusiness.GetAllAnimals(nome, status, peso, idade, sexo, porte, tipoAnimal);
+            return animalBusiness.GetAllAnimals(nome, doacaoId,racaId,status, peso, idade, sexo, porte, tipoAnimal);
         }
 
 
@@ -39,11 +39,6 @@ namespace DogNKitty.Controllers
             return animalBusiness.GetAnimalById(id);
         }
 
-        [HttpGet("filter")]
-        public ActionResult<IEnumerable<AnimalDto>> GetByFilter(int id,string nome,StatusEnum? status, double? Peso,int? idade, PorteEnum? porte, SexoEnum? sexo)
-        {
-            return animalBusiness.GetAllAnimaisByFilter(id);
-        }
 
         [HttpPost]
         public ActionResult<int> Post([FromBody] List<AnimalDto> animals)

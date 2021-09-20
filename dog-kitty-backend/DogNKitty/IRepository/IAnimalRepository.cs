@@ -7,7 +7,8 @@ namespace IRepository
 {
     public interface IAnimalRepository
     {
-        List<Animal> GetAnimal(string nome, StatusEnum? status, double? peso, int? idade, SexoEnum? sexo, PorteEnum? porte, AnimalEnum? tipoAnimal);
+        List<Animal> GetAnimal(string nome,int? doacaoId,int? racaId, StatusEnum? status, double? peso, int? idade, SexoEnum? sexo, PorteEnum? porte, AnimalEnum? tipoAnimal);
         Animal GetAnimalById(int id);
+        int InsertAnimal(Animal animal, int doacaoId);
     }
 }

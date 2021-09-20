@@ -26,11 +26,9 @@ export class UserDataComponent implements OnInit {
       endereco: new FormControl(user.endereco? user.endereco : ""),
       isAdmin: new FormControl(user.isAdmin? user.isAdmin : ""),
     })
-    console.log(this.formUser?.controls)
   }
   onSubmit(form:any) {
     var newUser = new Usuario();
-    console.log(form.value,this.formUser?.value)
     newUser.Email = this.formUser?.value.email;
     newUser.Nome = this.formUser?.value.nome;
     newUser.Contato = this.formUser?.value.contato;

@@ -45,7 +45,7 @@ namespace Controllers
         }
 
         [HttpPost]
-        public ActionResult<int> Post([FromBody] List<DoacaoDto> doacaos)
+        public ActionResult<int> Post([FromBody] DoacaoDto doacaos)
         {
             return doacaoBusiness.InsertDoacao(doacaos);
         }
@@ -61,11 +61,11 @@ namespace Controllers
         {
             doacaoBusiness.DeleteDoacaoById(id);
         }
-        [HttpDelete("usuario/{id}")]
+        /*[HttpDelete("usuario/{id}")]
         public void DeleteDoacaoByUsuario(int id)
         {
             doacaoBusiness.DeleteDoacaoByUsuario(id);
-        }
+        }*/
 
     }
 }

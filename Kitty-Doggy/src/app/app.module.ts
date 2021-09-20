@@ -13,6 +13,7 @@ import { HomeComponent } from './home/home.component';
 import { UserDataComponent } from './user-data/user-data.component';
 
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
+import { PostAdoptionComponent } from './adoption/post-adoption/post-adoption.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { FormsModule,ReactiveFormsModule } from '@angular/forms';
     BarComponent,
     HomeComponent,
     UserDataComponent,
+    PostAdoptionComponent,
   ],
   imports: [
     BrowserModule,

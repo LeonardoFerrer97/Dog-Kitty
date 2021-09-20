@@ -26,7 +26,6 @@ namespace Repository
             using (conn)
             {
                 var dictionaryAnimal = new Dictionary<int, Animal>();
-                var teste = string.Format(AnimalQueries.GET_ANIMAL_BY_ID, id);
                 var result = conn.Query<Animal, Foto, Raca, Animal>(String.Format(AnimalQueries.GET_ANIMAL_BY_ID, id), (a, f, r) =>
                 {
                     if (!dictionaryAnimal.TryGetValue(a.Id, out Animal aEntry))
@@ -49,14 +48,22 @@ namespace Repository
                 return result;
             }
         }
-        public List<Animal> GetAnimal(string nome,StatusEnum? status, double? peso,int? idade,SexoEnum? sexo, PorteEnum? porte, AnimalEnum? tipoAnimal)
+        public List<Animal> GetAnimal(string nome,int? doacaoId,int? racaId,StatusEnum? status, double? peso,int? idade,SexoEnum? sexo, PorteEnum? porte, AnimalEnum? tipoAnimal)
         {
             using (conn)
             {
                 string query = AnimalQueries.GET_ANIMAL;
                 if (nome != null && nome.Length > 0)
                 {
-                    query += " AND a.nome = '" + nome +"'";
+                    query += " AND a.nome = '" + nome + "'";
+                }
+                if (doacaoId.HasValue)
+                {
+                    query += " AND a.doacao_id = '" + (int)doacaoId.Value + "'";
+                }
+                if (racaId.HasValue)
+                {
+                    query += " AND a.raca_id = '" + (int)racaId.Value + "'";
                 }
                 if (status.HasValue)
                 {
@@ -102,6 +109,15 @@ namespace Repository
                     }
                     return aEntry;
                 }, null, splitOn: "id,id,id").AsList();
+                return result;
+            }
+        }
+
+        public int InsertAnimal(Animal animal, int doacaoId)
+        {
+            using (conn)
+            {
+                var result = conn.Query<int>(String.Format(AnimalQueries.INSERT_ANIMAL, animal.Nome, animal.Status, animal.Peso, animal.Idade, animal.Sexo, animal.Porte, animal.TipoAnimal,doacaoId)).AsList()[0];
                 return result;
             }
         }
