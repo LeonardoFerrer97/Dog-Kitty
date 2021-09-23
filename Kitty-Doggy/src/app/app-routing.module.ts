@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import {UserDataComponent} from './user-data/user-data.component';
+import { PostAdoptionComponent } from './adoption/post-adoption/post-adoption.component';
 
 const routes: Routes = [
   {
@@ -13,6 +14,10 @@ const routes: Routes = [
   {
     path: 'user-data',
     component: UserDataComponent,
+  },
+  {
+    path: 'create-adoption',
+    component: PostAdoptionComponent,
   },
   
 ];
