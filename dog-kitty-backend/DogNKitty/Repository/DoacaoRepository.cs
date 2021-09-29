@@ -75,7 +75,7 @@ namespace Repository
         {
             using (conn)
             {
-                var result = conn.Query<int>(String.Format(DoacaoQueries.INSERT_DOACAO,doacao.Descricao,doacao.Localizacao,doacao.Usuario.Id)).AsList()[0];
+                var result = conn.Query<int>(String.Format(DoacaoQueries.INSERT_DOACAO, "'" + doacao.Descricao+"'" , "'" + doacao.Localizacao+"'" , "'" + doacao.Usuario.Id+ "'" )).AsList()[0];
                 return result;
             }
         }

@@ -1,3 +1,4 @@
 export class Raca {
-    Nome: string|undefined;
+    Id: number|undefined;
+    Nome: string|undefined; 
 }

@@ -10,7 +10,7 @@ import { Raca } from 'src/domain/raca';
 import { StatusEnum } from 'src/domain/enum/statusEnum';
 import { Usuario } from 'src/domain/usuario';
 import { RacaService } from 'src/app/services/raca.service';
-import { createOfflineCompileUrlResolver } from '@angular/compiler';
+import {UserService} from 'src/app/services/user.service'
 @Component({
   selector: 'app-post-adoption',
   templateUrl: './post-adoption.component.html',
@@ -21,8 +21,12 @@ export class PostAdoptionComponent implements OnInit {
   doacao :Doacao = new Doacao();
   user: any;
   racas = new Array<Raca>();
-  constructor(public router: Router,public doacaoService: AdoptionService,public racaService: RacaService) { 
+  constructor(public router: Router,public doacaoService: AdoptionService,public racaService: RacaService,public userService:UserService) { 
     this.user = this.router?.getCurrentNavigation()?.extras?.state?.user;
+    console.log(this.user)
+    if(this.user == undefined){
+      this.router.navigate(['']);
+    }
   } 
 
   ngOnInit(): void {
@@ -59,7 +63,6 @@ export class PostAdoptionComponent implements OnInit {
     const file = event.target.files[0];
     const reader = new FileReader();
     reader.readAsDataURL(file);
-    console.log(file);
     reader.onload = () => {
       var foto = new Foto();
       foto.Imagem = reader.result.toString();
@@ -67,10 +70,16 @@ export class PostAdoptionComponent implements OnInit {
     };
   }
 
-  onChangeRaca(raca){
-    this.doacao.Animal.Raca.Nome = raca.outerText;
+  onChangeRaca(event :any){
+    this.doacao.Animal.Raca.Id = parseInt((document.getElementById("racaSelect") as HTMLInputElement).value);
   }
+
+getRacaId(raca:any){
+  return raca.id;
+}
+
   onSubmit(form:any) {
+    this.doacao.Animal.Raca.Id = parseInt((document.getElementById("racaSelect") as HTMLInputElement).value);
     var newDoacao = new Doacao();
     newDoacao.Localizacao = this.formDoacao?.value.localizacao;
     newDoacao.Descricao = this.formDoacao?.value.descricao;
@@ -79,14 +88,15 @@ export class PostAdoptionComponent implements OnInit {
     newDoacao.Animal.Status = StatusEnum.Doacao;
     newDoacao.Animal.Peso =this.formDoacao?.value.pesoAnimal;
     newDoacao.Animal.Idade =this.formDoacao?.value.idadeAnimal;
-    newDoacao.Animal.Sexo =this.formDoacao?.value.sexoAnimal;
-    newDoacao.Animal.Porte =this.formDoacao?.value.porteAnimal;
-    newDoacao.Animal.TipoAnimal =this.formDoacao?.value.tipoAnimal;
+    newDoacao.Animal.Sexo = parseInt(this.formDoacao?.value.sexoAnimal);
+    newDoacao.Animal.Porte =parseInt(this.formDoacao?.value.porteAnimal);
+    newDoacao.Animal.TipoAnimal =parseInt(this.formDoacao?.value.tipoAnimal);
     newDoacao.Animal.Raca = new Raca();
-    newDoacao.Animal.Raca.Nome = this.formDoacao?.value.racaAnimal;
+    newDoacao.Animal.Raca.Id = this.doacao.Animal.Raca.Id;
     newDoacao.Animal.Foto = this.doacao.Animal.Foto;
     newDoacao.Usuario = new Usuario();
-    newDoacao.Usuario.Id = 2;
+    console.log(this.user);
+      newDoacao.Usuario.Id=this.user.id;
     console.log(newDoacao);
     this.doacaoService.createDoacao(newDoacao).subscribe(()=>{
       this.router.navigate(['']);

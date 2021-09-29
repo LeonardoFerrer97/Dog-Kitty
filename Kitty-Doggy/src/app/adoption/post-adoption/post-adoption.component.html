@@ -40,16 +40,16 @@
           </select>
         </div>
         <div style="grid-area: tipo;" class="normalForm form-group">
-            <label for="porte">Porte do animal</label>
-            <select required class="form-control" [formControlName]="'porteAnimal'" id="porteAnimal" [value]="doacao.Animal.Porte">
+            <label for="porte">Tipo do animal</label>
+            <select required class="form-control" [formControlName]="'tipoAnimal'" id="tipoAnimal" [value]="doacao.Animal.TipoAnimal">
                 <option [value]="1">Cachorro</option>
                 <option [value]="2">Gato</option>
             </select>
           </div>
           <div style="grid-area: raca;" class="normalForm form-group">
-              <label for="raca">Raça do animal</label>
-              <select (change)=onChangeRaca($event) required class="form-control" [formControlName]="'racaAnimal'" id="racaAnimal" [value]="doacao.Animal.Raca">
-                <option *ngFor="let raca of racas" [value]="raca">
+              <label>Raça do animal</label>
+              <select id= "racaSelect" (change)=onChangeRaca($event) required class="form-control">
+                <option *ngFor="let raca of racas" [value]="getRacaId(raca)">
                     {{getNomeRaca(raca)}}
                 </option>
               </select>

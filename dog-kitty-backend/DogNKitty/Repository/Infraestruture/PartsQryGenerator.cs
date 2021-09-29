@@ -11,6 +11,7 @@ namespace Repository.Infraestruture
     {
         private PropertyInfo[] properties;
         private string[] propertiesNames;
+        private string[] propertiesNamesSelect;
         private string typeName;
 
         private string characterParameter;
@@ -22,6 +23,7 @@ namespace Repository.Infraestruture
             this.characterParameter = characterParameter.ToString();
 
             properties = type.GetProperties();
+            propertiesNamesSelect = properties.Where(a => !IsComplexType(a)).Select(a => a.Name).ToArray();
             propertiesNames = properties.Where(a => !IsComplexType(a) && a.Name != "Id").Select(a => a.Name).ToArray();
             typeName = type.Name;
         }
@@ -57,7 +59,7 @@ namespace Repository.Infraestruture
 
             string separator = $",";
 
-            string selectPart = string.Join(separator, propertiesNames);
+            string selectPart = string.Join(separator, propertiesNamesSelect);
 
             sb.AppendLine(selectPart);
 

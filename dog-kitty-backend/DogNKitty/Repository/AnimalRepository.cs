@@ -117,7 +117,7 @@ namespace Repository
         {
             using (conn)
             {
-                var result = conn.Query<int>(String.Format(AnimalQueries.INSERT_ANIMAL, animal.Nome, animal.Status, animal.Peso, animal.Idade, animal.Sexo, animal.Porte, animal.TipoAnimal,doacaoId)).AsList()[0];
+                var result = conn.Query<int>(String.Format(AnimalQueries.INSERT_ANIMAL, "'"+animal.Nome + "'" , "'" + ((int)animal.Status)+"'", "'" + animal.Peso + "'", "'" + animal.Idade + "'", "'" + ((int)animal.Sexo) + "'", "'" + ((int)animal.Porte) + "'", "'" + ((int)animal.TipoAnimal) + "'", "'" +doacaoId + "'", "'"+animal.Raca.Id + "'")).AsList()[0];
                 return result;
             }
         }
