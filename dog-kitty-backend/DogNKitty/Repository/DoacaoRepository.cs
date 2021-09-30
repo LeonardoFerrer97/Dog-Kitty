@@ -5,6 +5,7 @@ using Dapper;
 using Entity;
 using IRepository;
 using Npgsql;
+using Utils.Enums;
 using Utils.Query;
 
 namespace Repository
@@ -41,11 +42,12 @@ namespace Repository
                 return result;
             }
         }
-        public List<Doacao> GetDoacao(string localizacao, int? usuarioId)
+        public List<Doacao> GetDoacao(StatusEnum status, string localizacao, string raca, PorteEnum? porte, SexoEnum? sexo, AnimalEnum? animal, int? usuarioId)
         {
             using (conn)
             {
                 string query = DoacaoQueries.GET_DOACAO;
+                query += " AND a.status = '" + (int)status + "'";
                 if (localizacao != null && localizacao.Length > 0)
                 {
                     query += " AND d.localizacao = '" + localizacao + "'";
@@ -54,20 +56,54 @@ namespace Repository
                 {
                     query += " AND d.usuario_id = '" + (int)usuarioId.Value + "'";
                 }
-                var dictionaryDoacao = new Dictionary<int, Doacao>();
-                var result = conn.Query<Doacao,Usuario, Doacao>(query, (a, u) =>
+                if (porte.HasValue)
                 {
-                    if (!dictionaryDoacao.TryGetValue(a.Id, out Doacao aEntry))
+                    query += " AND a.porte = '" + (int)porte.Value + "'";
+                }
+                if (sexo.HasValue)
+                {
+                    query += " AND a.sexo = '" + (int)sexo.Value + "'";
+                }
+                if (animal.HasValue)
+                {
+                    query += " AND a.tipoanimal = '" + (int)animal.Value + "'";
+                }
+                if (raca != null && raca.Length > 0)
+                {
+                    query += " AND r.nome = '" + raca + "'";
+                }
+                var dictionaryDoacao = new Dictionary<int, Doacao>();
+                var result = conn.Query < Doacao, Usuario, Animal, Foto, Raca, Doacao>(query, (d, u,a,f,r) =>
+                {
+                    if (!dictionaryDoacao.TryGetValue(d.Id, out Doacao aEntry))
                     {
-                        aEntry = a;
+                        aEntry = d;
                         dictionaryDoacao.Add(aEntry.Id, aEntry);
                     }
                     if (u != null)
                     {
                         aEntry.Usuario = u;
                     }
+                if (a != null)
+                {
+                        if (aEntry.Animal == null) {
+                            aEntry.Animal = a;
+                            aEntry.Animal.Foto = new List<Foto>();
+                        }
+                    }
+
+                    if (r != null)
+                    {
+                        aEntry.Animal.Raca = r;
+
+                    }
+                    if (f != null)
+                    {
+                        aEntry.Animal.Foto.Add( f);
+
+                    }
                     return aEntry;
-                }, null, splitOn: "id,id").AsList();
+                }, null, splitOn: "id,id,id,id,id").AsList();
                 return result;
             }
         }

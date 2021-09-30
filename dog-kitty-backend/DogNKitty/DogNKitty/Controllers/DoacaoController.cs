@@ -7,6 +7,7 @@ using Utils;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Dto;
+using Utils.Enums;
 
 namespace Controllers
 {
@@ -25,23 +26,10 @@ namespace Controllers
         }
 
 
-        [HttpGet]
-        public ActionResult<IEnumerable<DoacaoDto>> Get()
+        [HttpGet("{status}")]
+        public ActionResult<IEnumerable<DoacaoDto>> Get(StatusEnum status,int? usuarioId, string raca, PorteEnum? porte, SexoEnum? sexo, AnimalEnum? animal, string localizacao)
         {
-            return doacaoBusiness.GetAllDoacaos();
-        }
-
-
-        [HttpGet("{id}")]
-        public ActionResult<DoacaoDto> GetById(int id)
-        {
-            return doacaoBusiness.GetDoacaoById(id);
-        }
-
-        [HttpGet("usuario/{id}")]
-        public ActionResult<IEnumerable<DoacaoDto>> GetByUsuarioId(int id)
-        {
-            return doacaoBusiness.GetAllDoacoesByUsuarioId(id);
+            return doacaoBusiness.GetAllDoacaos(status,localizacao,raca,porte,sexo,animal ,usuarioId);
         }
 
         [HttpPost]
@@ -61,11 +49,6 @@ namespace Controllers
         {
             doacaoBusiness.DeleteDoacaoById(id);
         }
-        /*[HttpDelete("usuario/{id}")]
-        public void DeleteDoacaoByUsuario(int id)
-        {
-            doacaoBusiness.DeleteDoacaoByUsuario(id);
-        }*/
 
     }
 }

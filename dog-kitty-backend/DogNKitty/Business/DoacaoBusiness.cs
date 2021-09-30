@@ -7,6 +7,7 @@ using Repository;
 using Business.Mappers;
 using Utils.Query;
 using IRepository;
+using Utils.Enums;
 
 namespace Business
 {
@@ -17,7 +18,6 @@ namespace Business
         private readonly AnimalMapper animalMapper = new AnimalMapper();
         private readonly FotoMapper fotoMapper = new FotoMapper();
         private readonly Repository<Foto> fotoRepository;
-        private readonly Repository<Raca> racaRepository;
         private readonly IDoacaoRepository doacaoRepositoryCustom;
         private readonly IAnimalRepository animalRepository;
 
@@ -25,34 +25,17 @@ namespace Business
         {
             doacaoRepository = new Repository<Doacao>(connection);
             fotoRepository = new Repository<Foto>(connection);
-            racaRepository = new Repository<Raca>(connection);
             doacaoRepositoryCustom = new DoacaoRepository(connection);
             animalRepository = new AnimalRepository(connection); 
         }
 
 
-        public List<DoacaoDto> GetAllDoacaos()
+        public List<DoacaoDto> GetAllDoacaos(StatusEnum status, string localizacao, string raca, PorteEnum? porte, SexoEnum? sexo, AnimalEnum? animal, int? usuarioId)
         {
-            IEnumerable<Doacao> doacaos = doacaoRepository.All();
+            IEnumerable<Doacao> doacaos = doacaoRepositoryCustom.GetDoacao(status, localizacao,raca,porte,sexo,animal,usuarioId);
 
             List<DoacaoDto> avaliacoesUsuario = mapper.ListEntityToListDto(doacaos);
             return avaliacoesUsuario;
-        }
-
-        public List<DoacaoDto> GetAllDoacoesByUsuarioId(int id)
-        {
-            object parameters = new { id };
-            IEnumerable<Doacao> doacoes = doacaoRepository.GetData(DoacaoQueries.GET_DOACAO_BY_USUARIO_ID, parameters);
-            return mapper.ListEntityToListDto(doacoes.ToList());
-        }
-
-        public DoacaoDto GetDoacaoById(int Id)
-        {
-            object parameters = new { Id };
-            Doacao doacaos = doacaoRepository.GetData(DoacaoQueries.GET_DOACAO_BY_ID, parameters).FirstOrDefault();
-
-            DoacaoDto doacao = mapper.EntityToDto(doacaos);
-            return doacao;
         }
 
         public int UpdateDoacao(DoacaoDto Doacao)

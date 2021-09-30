@@ -7,7 +7,7 @@ namespace IRepository
 {
     public interface IDoacaoRepository
     {
-        List<Doacao> GetDoacao(string localizacao, int? usuarioId);
+        List<Doacao> GetDoacao(StatusEnum status, string localizacao,string raca, PorteEnum? porte, SexoEnum? sexo,AnimalEnum? animal, int? usuarioId);
         Doacao GetDoacaoById(int id);
         int InsertDoacao(Doacao doacao);
     }
