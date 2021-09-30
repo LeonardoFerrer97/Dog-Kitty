@@ -27,7 +27,7 @@ namespace Controllers
 
 
         [HttpGet("{status}")]
-        public ActionResult<IEnumerable<DoacaoDto>> Get(StatusEnum status,int? usuarioId, string raca, PorteEnum? porte, SexoEnum? sexo, AnimalEnum? animal, string localizacao)
+        public ActionResult<IEnumerable<DoacaoDto>> Get(StatusEnum status,int? usuarioId, int? raca, PorteEnum? porte, SexoEnum? sexo, AnimalEnum? animal, string localizacao)
         {
             return doacaoBusiness.GetAllDoacaos(status,localizacao,raca,porte,sexo,animal ,usuarioId);
         }

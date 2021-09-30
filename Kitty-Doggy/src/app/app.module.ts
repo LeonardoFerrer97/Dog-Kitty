@@ -5,7 +5,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BarComponent } from './bar/bar.component';import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import {MatExpansionModule} from '@angular/material/expansion';
 import { HttpClientModule } from '@angular/common/http';
 import { UserService } from './services/user.service';    
 import { AuthModule, AuthService } from '@auth0/auth0-angular';
@@ -14,6 +14,7 @@ import { UserDataComponent } from './user-data/user-data.component';
 
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { PostAdoptionComponent } from './adoption/post-adoption/post-adoption.component';
+import { SeeAdoptionComponent } from './adoption/see-adoption/see-adoption.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { PostAdoptionComponent } from './adoption/post-adoption/post-adoption.co
     HomeComponent,
     UserDataComponent,
     PostAdoptionComponent,
+    SeeAdoptionComponent,
   ],
   imports: [
     BrowserModule,
@@ -32,7 +34,7 @@ import { PostAdoptionComponent } from './adoption/post-adoption/post-adoption.co
     AuthModule.forRoot({
       domain: 'dev-d1olx9ru.auth0.com',
       clientId: 'wnK9bKI1imlksxrkvuyVUM8fQ1zlL6uu'
-    }),HttpClientModule,ReactiveFormsModule,FormsModule
+    }),HttpClientModule,ReactiveFormsModule,FormsModule,MatExpansionModule
   ],
   providers: [AuthService,UserService],
   bootstrap: [AppComponent]

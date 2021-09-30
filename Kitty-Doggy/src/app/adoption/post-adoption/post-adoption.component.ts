@@ -23,7 +23,6 @@ export class PostAdoptionComponent implements OnInit {
   racas = new Array<Raca>();
   constructor(public router: Router,public doacaoService: AdoptionService,public racaService: RacaService,public userService:UserService) { 
     this.user = this.router?.getCurrentNavigation()?.extras?.state?.user;
-    console.log(this.user)
     if(this.user == undefined){
       this.router.navigate(['']);
     }

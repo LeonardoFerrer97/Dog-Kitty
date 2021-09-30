@@ -42,7 +42,7 @@ namespace Repository
                 return result;
             }
         }
-        public List<Doacao> GetDoacao(StatusEnum status, string localizacao, string raca, PorteEnum? porte, SexoEnum? sexo, AnimalEnum? animal, int? usuarioId)
+        public List<Doacao> GetDoacao(StatusEnum status, string localizacao, int? raca, PorteEnum? porte, SexoEnum? sexo, AnimalEnum? animal, int? usuarioId)
         {
             using (conn)
             {
@@ -68,9 +68,9 @@ namespace Repository
                 {
                     query += " AND a.tipoanimal = '" + (int)animal.Value + "'";
                 }
-                if (raca != null && raca.Length > 0)
+                if (raca.HasValue)
                 {
-                    query += " AND r.nome = '" + raca + "'";
+                    query += " AND r.id = '" + (int)raca.Value + "'";
                 }
                 var dictionaryDoacao = new Dictionary<int, Doacao>();
                 var result = conn.Query < Doacao, Usuario, Animal, Foto, Raca, Doacao>(query, (d, u,a,f,r) =>

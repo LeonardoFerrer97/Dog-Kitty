@@ -7,7 +7,7 @@ import { Doacao } from 'src/domain/doacao';
 })
 export class AdoptionService {
 
-  apiURL: string = 'https://localhost:5001/api/Doacao';
+  apiURL: string = 'https://kittyndoggy.azurewebsites.net/api/Doacao';
 
   constructor(private httpClient: HttpClient) {};
   public createDoacao(adocao: Doacao){
@@ -27,7 +27,9 @@ public getDoacaoById(id: number){
   return this.httpClient.get<Doacao[]>(`${this.apiURL}/${id}`);
 }
 
-public getDoacaos(url?: string){
-  return this.httpClient.get<Doacao[]>(`${this.apiURL}`);
+public getDoacaos(url: string,status){
+  url = this.apiURL+"/"+ status + url;
+  console.log(url)
+  return this.httpClient.get<Doacao[]>(`${url}`);
 }
 }

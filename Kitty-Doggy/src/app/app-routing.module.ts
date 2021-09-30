@@ -5,6 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import {UserDataComponent} from './user-data/user-data.component';
 import { PostAdoptionComponent } from './adoption/post-adoption/post-adoption.component';
+import { SeeAdoptionComponent } from './adoption/see-adoption/see-adoption.component';
 
 const routes: Routes = [
   {
@@ -18,6 +19,14 @@ const routes: Routes = [
   {
     path: 'create-adoption',
     component: PostAdoptionComponent,
+  },
+  {
+    path: 'adocao',
+    component: SeeAdoptionComponent,
+  },
+  {
+    path: 'perdidos',
+    component: SeeAdoptionComponent,
   },
   
 ];

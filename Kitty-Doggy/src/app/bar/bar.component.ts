@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { AuthService } from '@auth0/auth0-angular';
+import { StatusEnum } from 'src/domain/enum/statusEnum';
 import { Usuario } from 'src/domain/usuario';
 import { UserService } from '../services/user.service';
 
@@ -42,6 +43,12 @@ export class BarComponent implements OnInit {
       this.router.navigate(["user-data"],{state:{user:this.user}});   
      }else if(click=="createadoption"){
       this.router.navigate(["create-adoption"],{state:{user:this.user}});   
+     }else if(click=="home"){
+      this.router.navigate([""]);   
+     }else if(click=="doacao"){
+      this.router.navigate(["adocao"],{state:{status:StatusEnum.Doacao}});   
+     }else if(click=="perdido"){
+      this.router.navigate(["perdidos"],{state:{status:StatusEnum.Perdido}});   
      }
     
   }

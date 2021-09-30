@@ -6,7 +6,7 @@ import { Usuario } from '../../domain/usuario';
 })
 export class UserService {
 
-  apiURL: string = 'https://localhost:5001/api/Usuario';
+  apiURL: string = 'https://kittyndoggy.azurewebsites.net/api/Usuario';
 
   constructor(private httpClient: HttpClient) {};
   public createUser(user: Usuario){

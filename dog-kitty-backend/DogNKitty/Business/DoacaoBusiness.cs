@@ -30,7 +30,7 @@ namespace Business
         }
 
 
-        public List<DoacaoDto> GetAllDoacaos(StatusEnum status, string localizacao, string raca, PorteEnum? porte, SexoEnum? sexo, AnimalEnum? animal, int? usuarioId)
+        public List<DoacaoDto> GetAllDoacaos(StatusEnum status, string localizacao, int? raca, PorteEnum? porte, SexoEnum? sexo, AnimalEnum? animal, int? usuarioId)
         {
             IEnumerable<Doacao> doacaos = doacaoRepositoryCustom.GetDoacao(status, localizacao,raca,porte,sexo,animal,usuarioId);
 

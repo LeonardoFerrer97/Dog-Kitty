@@ -7,7 +7,7 @@ import { Raca } from 'src/domain/raca';
 })
 export class RacaService {
 
-  apiURL: string = 'https://localhost:5001/api/Raca';
+  apiURL: string = 'https://kittyndoggy.azurewebsites.net/api/Raca';
   constructor(private httpClient: HttpClient) {};
   public createRaca(raca: Raca){
     return this.httpClient.post(`${this.apiURL}`,raca);
