@@ -1,0 +1,35 @@
+
+.container {
+    display: grid;
+margin-top: 70px;
+  grid-template-columns: 10% 45% 35% 10%;
+  grid-template-rows: 100%;
+  grid-template-areas: 
+  "a img text b";
+max-height: 100%;
+    min-height: 87vh;
+    width: 100vw;
+  }
+  .img{
+    margin-top: 100px;
+  max-height: 70%;
+  width:70%;
+  margin-bottom: 100px;
+  justify-self: center;
+  align-self: center;
+  }
+  .text{
+    flex-grow:1;
+    display: flex;
+    flex: initial;
+    flex-direction: column;
+    color:#FE5F55;
+    justify-self: center;
+    margin: auto;
+    margin-top: 100px;
+  }
+  li{
+    list-style-type: circle;
+    flex-grow: 1;
+    margin:1px;
+  }

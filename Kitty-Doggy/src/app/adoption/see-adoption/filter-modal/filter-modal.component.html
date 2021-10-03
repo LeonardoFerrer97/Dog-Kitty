@@ -1,0 +1,83 @@
+
+<h2 class="title" mat-dialog-title>Filtros</h2>
+
+
+<mat-dialog-content [formGroup]="form">
+
+    <mat-form-field>
+
+        <input matInput
+                placeholder="Localizacao"
+               formControlName="localizacao">
+
+    </mat-form-field>
+
+    <mat-form-field>
+
+        <mat-select placeholder="Selecione a raca"
+            formControlName="raca">
+            <mat-option *ngFor="let raca of racas" [value]="raca.id">
+                {{raca.nome}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+
+        <mat-select placeholder="Selecione o porte"
+            formControlName="porte">
+
+            <mat-option value="1">
+                Pequeno</mat-option>
+            <mat-option value="2">
+                Medio</mat-option>
+            <mat-option value="3">
+                Grande</mat-option>
+
+        </mat-select>
+
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-select placeholder="Selecione o sexo"
+            formControlName="sexo">
+
+            <mat-option value="1">
+                Masculino</mat-option>
+            <mat-option value="2">
+                Feminino</mat-option>
+
+        </mat-select>
+
+    </mat-form-field>
+
+
+    <mat-form-field>
+        <mat-select placeholder="Selecione o tipo do animal"
+            formControlName="tipo">
+
+            <mat-option value="1">
+                Cachorro</mat-option>
+            <mat-option value="2">
+                Gato</mat-option>
+
+        </mat-select>
+
+    </mat-form-field>
+
+
+</mat-dialog-content>
+
+<mat-dialog-actions class="actions">
+
+    <button class="close"
+            (click)="close()">
+        Close
+    </button>
+
+    <button class="button"
+            (click)="save()">
+        Filtrar
+    </button>
+
+</mat-dialog-actions>

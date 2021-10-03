@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSpinnerComponent } from 'src/app/mat-spinner/mat-spinner.component';
 
 import { Router } from '@angular/router';
 import { FormGroup, FormControl } from '@angular/forms';
@@ -11,6 +12,7 @@ import { StatusEnum } from 'src/domain/enum/statusEnum';
 import { Usuario } from 'src/domain/usuario';
 import { RacaService } from 'src/app/services/raca.service';
 import {UserService} from 'src/app/services/user.service'
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 @Component({
   selector: 'app-post-adoption',
   templateUrl: './post-adoption.component.html',
@@ -21,7 +23,7 @@ export class PostAdoptionComponent implements OnInit {
   doacao :Doacao = new Doacao();
   user: any;
   racas = new Array<Raca>();
-  constructor(public router: Router,public doacaoService: AdoptionService,public racaService: RacaService,public userService:UserService) { 
+  constructor(public router: Router,public doacaoService: AdoptionService,public racaService: RacaService,public userService:UserService,public dialog2: MatDialog) { 
     this.user = this.router?.getCurrentNavigation()?.extras?.state?.user;
     if(this.user == undefined){
       this.router.navigate(['']);
@@ -94,12 +96,14 @@ getRacaId(raca:any){
     newDoacao.Animal.Raca.Id = this.doacao.Animal.Raca.Id;
     newDoacao.Animal.Foto = this.doacao.Animal.Foto;
     newDoacao.Usuario = new Usuario();
-    console.log(this.user);
       newDoacao.Usuario.Id=this.user.id;
-    console.log(newDoacao);
+      let dialogRef: MatDialogRef<MatSpinnerComponent> = this.dialog2.open(MatSpinnerComponent, {
+        panelClass: 'transparent',
+        disableClose: true
+      });
     this.doacaoService.createDoacao(newDoacao).subscribe(()=>{
-      this.router.navigate(['']);
-    })
+      this.router.navigate(['']);dialogRef.close();
+    },error=>{ dialogRef.close();})
   }
 
 }

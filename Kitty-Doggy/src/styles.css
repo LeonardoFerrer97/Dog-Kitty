@@ -6,3 +6,9 @@
     margin: 0;
     overflow: hidden;
         }
+        .mat-progress-spinner circle, .mat-spinner circle {
+            stroke: #fe5f55!important;
+        }
+        .mat-progress-spinner{
+            background-color: transparent !important;
+        }

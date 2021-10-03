@@ -1,0 +1,26 @@
+<div class="container">
+    <div style="grid-area:a"></div>
+    <img class="img" style="grid-area:img" src="{{doacao.animal.foto[0].imagem}}"/>
+    <div class="text" style="grid-area:text">
+        <p>Dados do animal:</p>
+        <ul>
+        <li>Nome: {{doacao.animal.nome}}</li>
+        <li>{{doacao.localizacao}}</li>
+        <li>{{doacao.descricao}}</li>
+        <li>Porte: {{getPorte(doacao.animal.porte)}}</li>
+        <li>Peso: {{doacao.animal.peso}}kgs</li>
+        <li>Sexo: {{getSexo(doacao.animal.sexo)}}</li>
+        <li>{{getTipoAnimal(doacao.animal.tipoAnimal)}}</li>
+        <li>Idade: {{doacao.animal.idade}}</li>
+        <li>Raça: {{doacao.animal.raca.nome}}</li>
+    </ul>
+        <p>Dados do usuario:</p>
+        <ul>
+        <li>Nome: {{doacao.usuario.nome}}</li>
+        <li>E-mail: {{doacao.usuario.email}}</li>
+        <li>Contato: {{doacao.usuario.contato}}</li>
+        <li>Endereço: {{doacao.usuario.endereco}}</li>
+    </ul>
+    </div>
+    <div style="grid-area:b"></div>
+</div>
