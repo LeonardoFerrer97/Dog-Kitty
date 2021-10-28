@@ -23,6 +23,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { MatSelectModule } from "@angular/material/select";
 import { MatSpinnerComponent } from './mat-spinner/mat-spinner.component';
 import { AdoptionDataComponent } from './adoption/see-adoption/adoption-data/adoption-data.component';
+import { ForumComponent } from './forum/forum.component';
+import { NewChatModalComponent } from './forum/new-chat-modal/new-chat-modal.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,6 +36,8 @@ import { AdoptionDataComponent } from './adoption/see-adoption/adoption-data/ado
     FilterModalComponent,
     MatSpinnerComponent,
     AdoptionDataComponent,
+    ForumComponent,
+    NewChatModalComponent,
   ],
   imports: [
     BrowserModule,

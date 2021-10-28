@@ -1,0 +1,15 @@
+<div class="container">
+    <div *ngFor="let chat of chatsToDisplay;let indexOfelement=index;">
+        <p class="title">{{chat.title}}</p>
+    </div>
+    <button class="button" 
+    (click)="createNewChat()"> Criar novo chat</button>
+</div>
+
+<mat-paginator [length]="chats?.length"
+[pageSize]="6"
+aria-label="Select page"
+class="paginator"
+
+(page)="onChangePage($event)">
+</mat-paginator>

@@ -1,5 +1,8 @@
 <div class="container">
-  <div class="title" style="grid-area: a" > Adoções dísponiveis</div>
+  <div *ngIf="this.status==2 && this.user==null"class="title" style="grid-area: a" > Adoções dísponiveis</div>
+  <div *ngIf="this.status==1 && this.user==null"class="title" style="grid-area: a" > Pets perdidos</div>
+  <div *ngIf="this.status==2 && this.user!=null"class="title" style="grid-area: a" > Minhas adoções</div>
+  <div *ngIf="this.status==1 && this.user!=null"class="title" style="grid-area: a" > Meus pets perdidos</div>
   <div style="grid-area: b" ></div>
   <button class="button" style="grid-area: button" (click)="openModal()"> FILTRAR </button>
 <div *ngFor="let doacao of doacoesToDisplay;let indexOfelement=index;" [style.grid-area]="{indexOfelement}" class="doacao" (click)="onClickDoacao(doacao)">

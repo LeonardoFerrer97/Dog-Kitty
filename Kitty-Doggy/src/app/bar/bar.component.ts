@@ -39,16 +39,25 @@ export class BarComponent implements OnInit {
   }
 
   onClickText(click:string){
+    console.log(this.user);
     if(click=="updatedata"){
       this.router.navigate(["user-data"],{state:{user:this.user}});   
      }else if(click=="createadoption"){
-      this.router.navigate(["create-adoption"],{state:{user:this.user}});   
+      this.router.navigate(["create-adoption"],{state:{status:StatusEnum.Doacao,user:this.user}});   
      }else if(click=="home"){
       this.router.navigate([""]);   
      }else if(click=="doacao"){
       this.router.navigate(["adocao"],{state:{status:StatusEnum.Doacao}});   
      }else if(click=="perdido"){
       this.router.navigate(["perdidos"],{state:{status:StatusEnum.Perdido}});   
+     }else if(click=="myadoptions"){
+      this.router.navigate(["myadoptions"],{state:{status:StatusEnum.Doacao,user:this.user}});   
+     }else if(click=="mylostpets"){
+      this.router.navigate(["mylostpets"],{state:{status:StatusEnum.Perdido,user:this.user}});   
+     }else if(click=="createlost"){
+      this.router.navigate(["create-lost"],{state:{status:StatusEnum.Perdido,user:this.user}});   
+     }else if(click=="forum"){
+      this.router.navigate(["forum"],{state:{user:this.user}});   
      }
     
   }

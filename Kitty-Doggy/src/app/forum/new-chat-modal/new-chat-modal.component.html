@@ -1,0 +1,30 @@
+
+<h2 class="title" mat-dialog-title>Novo chat</h2>
+
+
+<mat-dialog-content [formGroup]="form">
+
+    <mat-form-field>
+
+        <input matInput
+                placeholder="Titulo do chat"
+               formControlName="title">
+
+    </mat-form-field>
+
+
+</mat-dialog-content>
+
+<mat-dialog-actions class="actions">
+
+    <button class="close"
+            (click)="close()">
+        Fechar
+    </button>
+
+    <button class="button"
+            (click)="save()">
+        Criar
+    </button>
+
+</mat-dialog-actions>

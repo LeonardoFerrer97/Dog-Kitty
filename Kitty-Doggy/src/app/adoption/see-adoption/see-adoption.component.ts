@@ -15,16 +15,18 @@ import { FilterModalComponent } from './filter-modal/filter-modal.component';
 })
 export class SeeAdoptionComponent {
   status:StatusEnum;
+  user:any;
   doacoes:any[];
   doacoesToDisplay:any[];
   constructor(public router: Router,public doacaoService: AdoptionService,public dialog: MatDialog,public dialog2: MatDialog) {
-    this.status=this.router?.getCurrentNavigation()?.extras?.state?.status;    
+    this.status=this.router?.getCurrentNavigation()?.extras?.state?.status;
+    this.user = this.router?.getCurrentNavigation()?.extras?.state?.user;    
     if(this.status == undefined){
       this.router.navigate(['']);
     }
-    this.getAnimais(null,null,null,null,null);
+    this.getAnimais(null,null,null,null,null,this.user?.id);
    }
-  getAnimais(raca,porte,sexo,tipoAnimal,localizacao){
+  getAnimais(raca,porte,sexo,tipoAnimal,localizacao,usuarioId){
     var url="",hasParameter=false;
     if(raca!=undefined){
       if(hasParameter){
@@ -62,6 +64,13 @@ export class SeeAdoptionComponent {
         url+="localizacao=" +localizacao
       hasParameter =true;
     }
+    if(usuarioId!=undefined){
+      if(hasParameter){
+        url+="&usuarioId=" +usuarioId
+      }else
+        url+="usuarioId=" +usuarioId
+      hasParameter =true;
+    }
     if(hasParameter){
       url= "?"+url;
     }
@@ -90,7 +99,7 @@ export class SeeAdoptionComponent {
     const dialogRef = this.dialog.open(FilterModalComponent,
       dialogConfig);
     dialogRef.afterClosed().subscribe(
-      val => this.getAnimais(val.raca,val.porte,val.sexo,val.tipo,val.localizacao)
+      val => this.getAnimais(val.raca,val.porte,val.sexo,val.tipo,val.localizacao,this.user?.id)
     );
   }
   onChangePage(page){

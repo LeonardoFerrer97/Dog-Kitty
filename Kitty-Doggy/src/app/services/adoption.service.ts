@@ -29,7 +29,7 @@ public getDoacaoById(id: number){
 
 public getDoacaos(url: string,status){
   url = this.apiURL+"/"+ status + url;
-  console.log(url)
+  console.log(url);
   return this.httpClient.get<Doacao[]>(`${url}`);
 }
 }

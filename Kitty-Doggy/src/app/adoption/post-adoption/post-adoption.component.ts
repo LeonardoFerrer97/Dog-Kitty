@@ -22,9 +22,11 @@ export class PostAdoptionComponent implements OnInit {
   formDoacao: FormGroup
   doacao :Doacao = new Doacao();
   user: any;
+  status: StatusEnum;
   racas = new Array<Raca>();
   constructor(public router: Router,public doacaoService: AdoptionService,public racaService: RacaService,public userService:UserService,public dialog2: MatDialog) { 
     this.user = this.router?.getCurrentNavigation()?.extras?.state?.user;
+    this.status = this.router?.getCurrentNavigation()?.extras?.state?.status;
     if(this.user == undefined){
       this.router.navigate(['']);
     }
@@ -86,7 +88,7 @@ getRacaId(raca:any){
     newDoacao.Descricao = this.formDoacao?.value.descricao;
     newDoacao.Animal = new Animal();
     newDoacao.Animal.Nome =this.formDoacao?.value.nomeAnimal;
-    newDoacao.Animal.Status = StatusEnum.Doacao;
+    newDoacao.Animal.Status = this.status;
     newDoacao.Animal.Peso =this.formDoacao?.value.pesoAnimal;
     newDoacao.Animal.Idade =this.formDoacao?.value.idadeAnimal;
     newDoacao.Animal.Sexo = parseInt(this.formDoacao?.value.sexoAnimal);

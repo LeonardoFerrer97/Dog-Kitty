@@ -1,8 +1,8 @@
 <div class="bar">
     <p class="text" (click)="onClickText('home')">KittyNDoggy</p>
     <p class="text" (click)="onClickText('doacao')">Adoção</p>
-    <!--<p class="text" (click)="onClickText('perdido')">Pets Perdidos</p>
-    <p class="text" (click)="onClickText('aa')">Forúm</p>-->
+    <p class="text" (click)="onClickText('perdido')">Pets Perdidos</p>
+    <p *ngIf="isLoggedIn"  class="text" (click)="onClickText('forum')">Forúm</p>
     <button class="icon" mat-icon-button [matMenuTriggerFor]="menu" >
         <mat-icon>account_circle</mat-icon>
       </button>
@@ -13,8 +13,12 @@
         </button>
         <button *ngIf="isLoggedIn" (click)="onClickText('createadoption')"  mat-menu-item>Postar adoção
         </button>
-        <!--<button *ngIf="isLoggedIn" (click)="onClickText('createlost')"  mat-menu-item>Postar pet perdido
-        </button>-->
+        <button *ngIf="isLoggedIn" (click)="onClickText('myadoptions')"  mat-menu-item>Minhas adoções
+        </button>
+        <button *ngIf="isLoggedIn" (click)="onClickText('createlost')"  mat-menu-item>Postar pet perdido
+        </button>
+        <button *ngIf="isLoggedIn" (click)="onClickText('mylostpets')"  mat-menu-item>Meus pets perdidos
+        </button>
         <button *ngIf="isLoggedIn" (click)="Logout()"  mat-menu-item>Logout
         </button>
         </mat-menu>
