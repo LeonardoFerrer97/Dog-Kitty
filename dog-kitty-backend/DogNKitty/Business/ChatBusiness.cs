@@ -12,16 +12,18 @@ namespace Business
     {
         private readonly ChatMapper mapper = new ChatMapper();
         private readonly Repository<Chat> chatRepository;
+        private readonly ChatRepository chatRepositoryCustom;
 
         public ChatBusiness(string connection)
         {
             chatRepository = new Repository<Chat>(connection);
+            chatRepositoryCustom = new ChatRepository(connection);
         }
 
 
-        public List<ChatDto> GetAllChat()
+        public List<ChatDto> GetAllChat(string title)
         {
-            IEnumerable<Chat> doacaos = chatRepository.All();
+            IEnumerable<Chat> doacaos = chatRepositoryCustom.GetChats(title);
 
             List<ChatDto> avaliacoesChat = mapper.ListEntityToListDto(doacaos);
             return avaliacoesChat;
@@ -30,6 +32,14 @@ namespace Business
         public ChatDto GetChatByDoacaoId(int CursoIdAvaliacao)
         {
             object parameters = new { CursoIdAvaliacao };
+            Chat chats = chatRepository.GetData("", parameters).FirstOrDefault();
+            return mapper.EntityToDto(chats);
+        }
+        
+
+        public ChatDto GetFromTitle(string title)
+        {
+            object parameters = new { title };
             Chat chats = chatRepository.GetData("", parameters).FirstOrDefault();
             return mapper.EntityToDto(chats);
         }

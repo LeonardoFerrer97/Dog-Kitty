@@ -26,9 +26,9 @@ namespace DogNKitty.Controllers
 
 
         [HttpGet]
-        public ActionResult<IEnumerable<ChatDto>> Get()
+        public ActionResult<IEnumerable<ChatDto>> Get(string title)
         {
-            return chatBusiness.GetAllChat();
+            return chatBusiness.GetAllChat(title);
         }
 
 
@@ -37,6 +37,7 @@ namespace DogNKitty.Controllers
         {
             return chatBusiness.GetChatById(id);
         }
+
 
         [HttpPost]
         public ActionResult<int> Post([FromBody] List<ChatDto> doacaos)

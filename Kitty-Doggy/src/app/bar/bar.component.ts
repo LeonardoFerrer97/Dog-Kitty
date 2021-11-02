@@ -39,7 +39,6 @@ export class BarComponent implements OnInit {
   }
 
   onClickText(click:string){
-    console.log(this.user);
     if(click=="updatedata"){
       this.router.navigate(["user-data"],{state:{user:this.user}});   
      }else if(click=="createadoption"){
