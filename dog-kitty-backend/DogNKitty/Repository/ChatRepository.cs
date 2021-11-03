@@ -26,7 +26,7 @@ namespace Repository
             using (conn)
             {
                 var sql = ChatQueries.GET_CHATS;
-                if (string.IsNullOrWhiteSpace(title))
+                if (!string.IsNullOrWhiteSpace(title))
                 {
                     sql += "WHERE title LIKE %" + title + "%";
                 }
