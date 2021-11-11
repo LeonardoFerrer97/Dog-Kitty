@@ -15,6 +15,7 @@ namespace Business
     {
         private readonly DoacaoMappers mapper = new DoacaoMappers();
         private readonly Repository<Doacao> doacaoRepository;
+        private readonly Repository<Animal> animalCustomRepository;
         private readonly AnimalMapper animalMapper = new AnimalMapper();
         private readonly FotoMapper fotoMapper = new FotoMapper();
         private readonly Repository<Foto> fotoRepository;
@@ -25,6 +26,7 @@ namespace Business
         {
             doacaoRepository = new Repository<Doacao>(connection);
             fotoRepository = new Repository<Foto>(connection);
+            animalCustomRepository = new Repository<Animal>(connection);
             doacaoRepositoryCustom = new DoacaoRepository(connection);
             animalRepository = new AnimalRepository(connection); 
         }
@@ -40,13 +42,19 @@ namespace Business
 
         public int UpdateDoacao(DoacaoDto Doacao)
         {
-            return doacaoRepository.InstertOrUpdate(mapper.DtoToEntity(Doacao), new { DoacaoId = Doacao.Id });
+            animalCustomRepository.InstertOrUpdate(animalMapper.DtoToEntity(Doacao.Animal),Doacao.Animal.Id);
+            return doacaoRepository.InstertOrUpdate(mapper.DtoToEntity(Doacao),Doacao.Id);
         }
 
 
-        public void DeleteDoacaoById(int Id)
+        public void DeleteDoacaoById(DoacaoDto doacao)
         {
-            doacaoRepository.Remove(new { Id });
+            foreach (var foto in doacao.Animal.Foto)
+            {
+                animalCustomRepository.Remove(new { foto.Id });
+            }
+            animalCustomRepository.Remove(new { doacao.Animal.Id});
+            doacaoRepository.Remove(new { doacao.Id });
         }
 
 

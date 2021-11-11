@@ -9,11 +9,11 @@ using Microsoft.Extensions.Options;
 using Dto;
 using Utils.Enums;
 
-namespace Controllers
+namespace DogNKitty.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class DoacaoController : ControllerBase
+    public class DoacaoController 
     {
         private readonly DoacaoBusiness doacaoBusiness;
 
@@ -44,10 +44,10 @@ namespace Controllers
             return doacaoBusiness.UpdateDoacao(Doacao);
         }
 
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpDelete()]
+        public void Delete([FromBody] DoacaoDto Doacao)
         {
-            doacaoBusiness.DeleteDoacaoById(id);
+            doacaoBusiness.DeleteDoacaoById(Doacao);
         }
 
     }

@@ -18,9 +18,9 @@ public updateDoacao(adocao: Doacao){
   return this.httpClient.put(`${this.apiURL}`,adocao);
 }
 
-public deleteDoacao(id: number){
+public deleteDoacao(adocao: Doacao){
 
-  return this.httpClient.delete(`${this.apiURL}/${id}`);
+  return this.httpClient.delete(`${this.apiURL}`,{body:adocao});
 }
 
 public getDoacaoById(id: number){

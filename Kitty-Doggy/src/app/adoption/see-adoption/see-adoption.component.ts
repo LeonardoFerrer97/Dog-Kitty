@@ -18,9 +18,11 @@ export class SeeAdoptionComponent {
   user:any;
   doacoes:any[];
   doacoesToDisplay:any[];
+  isMyAdoption:any;
   constructor(public router: Router,public doacaoService: AdoptionService,public dialog: MatDialog,public dialog2: MatDialog) {
     this.status=this.router?.getCurrentNavigation()?.extras?.state?.status;
     this.user = this.router?.getCurrentNavigation()?.extras?.state?.user;    
+    this.isMyAdoption = this.router?.getCurrentNavigation()?.extras?.state?.isMyAdoption;    
     if(this.status == undefined){
       this.router.navigate(['']);
     }
@@ -115,8 +117,8 @@ export class SeeAdoptionComponent {
     }
   }
   onClickDoacao(adocao:any){
-    console.log(adocao);
-    this.router.navigate(["adocao/dados"],{state:{doacao:adocao}});   
+    this.router.navigate(["adocao/dados"],{state:{doacao:adocao,status:this.status,user:this.user,isMyAdoption:this.isMyAdoption}});   
+    
   }
 
 }

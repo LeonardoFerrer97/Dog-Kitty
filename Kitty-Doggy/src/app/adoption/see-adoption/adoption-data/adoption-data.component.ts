@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AdoptionService } from 'src/app/services/adoption.service';
 import { AnimalEnum } from 'src/domain/enum/animalEnum';
 import { PorteEnum } from 'src/domain/enum/porteEnum';
 import { SexoEnum } from 'src/domain/enum/sexoEnum';
+import { StatusEnum } from 'src/domain/enum/statusEnum';
 
 @Component({
   selector: 'app-adoption-data',
@@ -10,9 +12,14 @@ import { SexoEnum } from 'src/domain/enum/sexoEnum';
   styleUrls: ['./adoption-data.component.css']
 })
 export class AdoptionDataComponent implements OnInit {
-
-  constructor(public router: Router) { 
+  isMyAdoption=false;
+  user:any;
+  status;
+  constructor(public router: Router,public doacaoService: AdoptionService) { 
     this.doacao = this.router?.getCurrentNavigation()?.extras?.state?.doacao;
+    this.isMyAdoption = this.router?.getCurrentNavigation()?.extras?.state?.isMyAdoption;
+    this.user = this.router?.getCurrentNavigation()?.extras?.state?.user;
+    this.status = this.router?.getCurrentNavigation()?.extras?.state?.status;
     if(this.doacao == undefined){
       this.router.navigate(['']);
     }}
@@ -46,6 +53,16 @@ export class AdoptionDataComponent implements OnInit {
         }
     }
     return "";
+  }
+
+  DeleteDoacao(){
+    this.doacaoService.deleteDoacao(this.doacao.id).subscribe(()=>{
+      this.router.navigate(["myadoptions"],{state:{status:this.status,user:this.user}});  
+    })
+  }
+  UpdateDoacao(){
+    console.log(this.user)
+    this.router.navigate(["myadoptions/update"],{state:{doacao:this.doacao,status:this.status,user:this.user}});  
   }
 
 }

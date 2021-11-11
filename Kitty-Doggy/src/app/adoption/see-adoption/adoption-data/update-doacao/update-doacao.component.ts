@@ -14,19 +14,20 @@ import { RacaService } from 'src/app/services/raca.service';
 import {UserService} from 'src/app/services/user.service'
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 @Component({
-  selector: 'app-post-adoption',
-  templateUrl: './post-adoption.component.html',
-  styleUrls: ['./post-adoption.component.css']
+  selector: 'app-update-doacao',
+  templateUrl: './update-doacao.component.html',
+  styleUrls: ['./update-doacao.component.css']
 })
-export class PostAdoptionComponent implements OnInit {
+export class UpdateDoacaoComponent implements OnInit {
   formDoacao: FormGroup
-  doacao :Doacao = new Doacao();
+  doacao :any;
   user: any;
   status: StatusEnum;
   racas = new Array<Raca>();
   constructor(public router: Router,public doacaoService: AdoptionService,public racaService: RacaService,public userService:UserService,public dialog2: MatDialog) { 
     this.user = this.router?.getCurrentNavigation()?.extras?.state?.user;
     this.status = this.router?.getCurrentNavigation()?.extras?.state?.status;
+    this.doacao = this.router?.getCurrentNavigation()?.extras?.state?.doacao;
     if(this.user == undefined){
       this.router.navigate(['']);
     }
@@ -49,17 +50,18 @@ export class PostAdoptionComponent implements OnInit {
     this.doacao.Animal = new Animal();
     this.doacao.Animal.Foto = new Array<Foto>();
     this.doacao.Animal.Raca = new Raca();
+    console.log(this.doacao)
     this.formDoacao = new FormGroup({
-      localizacao: new FormControl(this.doacao.Localizacao? this.doacao.Localizacao : ""),
-      descricao: new FormControl(this.doacao.Descricao? this.doacao.Descricao : ""),
-      nomeAnimal: new FormControl(this.doacao.Animal.Nome? this.doacao.Animal.Nome : ""),
-      fotoAnimal: new FormControl(this.doacao.Animal.Foto? this.doacao.Animal.Foto : ""),
-      pesoAnimal: new FormControl(this.doacao.Animal.Peso? this.doacao.Animal.Peso : ""),
-      idadeAnimal: new FormControl(this.doacao.Animal.Idade? this.doacao.Animal.Idade : ""),
-      sexoAnimal: new FormControl(this.doacao.Animal.Sexo? this.doacao.Animal.Sexo : ""),
-      porteAnimal: new FormControl(this.doacao.Animal.Porte? this.doacao.Animal.Porte : ""),
-      tipoAnimal: new FormControl(this.doacao.Animal.TipoAnimal? this.doacao.Animal.TipoAnimal : ""),
-      racaAnimal: new FormControl(this.doacao.Animal.Raca? this.doacao.Animal.Raca : ""),
+      localizacao: new FormControl(this.doacao.localizacao? this.doacao.localizacao : ""),
+      descricao: new FormControl(this.doacao.descricao? this.doacao.descricao : ""),
+      nomeAnimal: new FormControl(this.doacao.animal.nome? this.doacao.animal.nome : ""),
+      fotoAnimal: new FormControl( ""),
+      pesoAnimal: new FormControl(this.doacao.animal.peso? this.doacao.animal.peso : ""),
+      idadeAnimal: new FormControl(this.doacao.animal.idade? this.doacao.animal.idade : ""),
+      sexoAnimal: new FormControl(this.doacao.animal.sexo? this.doacao.animal.sexo : ""),
+      porteAnimal: new FormControl(this.doacao.animal.porte? this.doacao.animal.porte : ""),
+      tipoAnimal: new FormControl(this.doacao.animal.tipoAnimal? this.doacao.animal.tipoAnimal : ""),
+      racaAnimal: new FormControl(this.doacao.animal.raca? this.doacao.animal.raca : ""),
     })
   }
   onAddFoto(event){
@@ -103,8 +105,9 @@ getRacaId(raca:any){
         panelClass: 'transparent',
         disableClose: true
       });
-    this.doacaoService.createDoacao(newDoacao).subscribe(()=>{
-      this.router.navigate(['']);dialogRef.close();
+    this.doacaoService.updateDoacao(newDoacao).subscribe(()=>{
+      this.router.navigate(["myadoptions/update"],{state:{doacao:this.doacao,status:this.status,user:this.user}});  
+      dialogRef.close();
     },error=>{ dialogRef.close();})
   }
 

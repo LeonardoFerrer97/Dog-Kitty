@@ -1,0 +1,68 @@
+.container {
+    display: grid;
+margin-top: 70px;
+  grid-template-columns: 15% 35% 35% 15%;
+  grid-template-rows: 5% 15% 15% 15% 15% 15% 10%; 
+  grid-template-areas: 
+  "a b m lda"
+  "r loc desc n"
+  "e nome foto o "
+  "f peso idade p"
+  "i sexo porte w "
+  "t tipo raca  w"
+  "c  d submit dsadas";
+
+    min-height: 100vh;
+    width: 100vw;
+  }
+
+  .normalForm{
+
+    justify-self: left;
+    align-self: center;
+    
+  }
+  .form-group {
+    margin-bottom: 10px;
+    width: 90%;
+  }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      color: #FE5F55;
+  }
+  .form-group button {
+      width: 100%;
+      color: white;
+      background: black;
+      border-radius: 3px;
+      border: 1px solid black;
+      padding: 10px;
+  }
+  
+  .form-group input {
+      padding: 10px;
+      border-radius: 3px;
+      border: 1px solid darkgrey;
+      width: 100%;
+      box-sizing: border-box;
+  }
+  
+  .form-group select {
+      padding: 10px;
+      border-radius: 3px;
+      border: 1px solid darkgrey;
+      width: 100%;
+      box-sizing: border-box;
+  }
+  .btn {
+    color:white;
+    width: 20%;
+    height: 50%;
+    border-radius: 40%;
+    border: 1px;
+    background-color: #FE5F55;
+    justify-self: right;
+  }
+

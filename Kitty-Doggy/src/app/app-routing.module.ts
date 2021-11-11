@@ -8,6 +8,7 @@ import { PostAdoptionComponent } from './adoption/post-adoption/post-adoption.co
 import { SeeAdoptionComponent } from './adoption/see-adoption/see-adoption.component';
 import { AdoptionDataComponent } from './adoption/see-adoption/adoption-data/adoption-data.component';
 import { ForumComponent } from './forum/forum.component';
+import { UpdateDoacaoComponent } from './adoption/see-adoption/adoption-data/update-doacao/update-doacao.component';
 
 const routes: Routes = [
   {
@@ -45,6 +46,10 @@ const routes: Routes = [
   {
     path: 'myadoptions',
     component: SeeAdoptionComponent,
+  },
+  {
+    path: 'myadoptions/update',
+    component: UpdateDoacaoComponent,
   },
   {
     path: 'forum',

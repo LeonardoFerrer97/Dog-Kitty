@@ -25,6 +25,8 @@ import { MatSpinnerComponent } from './mat-spinner/mat-spinner.component';
 import { AdoptionDataComponent } from './adoption/see-adoption/adoption-data/adoption-data.component';
 import { ForumComponent } from './forum/forum.component';
 import { NewChatModalComponent } from './forum/new-chat-modal/new-chat-modal.component';
+import { UpdateDoacaoComponent } from './adoption/see-adoption/adoption-data/update-doacao/update-doacao.component';
+import { AdoptionService } from './services/adoption.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,6 +40,7 @@ import { NewChatModalComponent } from './forum/new-chat-modal/new-chat-modal.com
     AdoptionDataComponent,
     ForumComponent,
     NewChatModalComponent,
+    UpdateDoacaoComponent,
   ],
   imports: [
     BrowserModule,
@@ -52,7 +55,7 @@ import { NewChatModalComponent } from './forum/new-chat-modal/new-chat-modal.com
     MatPaginatorModule,MatProgressSpinnerModule
 
   ],
-  providers: [AuthService,UserService],
+  providers: [AuthService,UserService,AdoptionService],
   bootstrap: [AppComponent],
 
   entryComponents: [

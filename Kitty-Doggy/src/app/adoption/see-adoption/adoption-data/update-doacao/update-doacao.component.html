@@ -1,0 +1,60 @@
+<form class="container" (ngSubmit)="onSubmit(formDoacao)" [formGroup]="formDoacao" >
+
+    <div style="grid-area: loc;" class="normalForm form-group">
+        <label for="localizacao">Localização</label>
+        <input required type="text" class="form-control" [formControlName]="'localizacao'" id="localizacao" [value]="doacao.Localizacao" >
+      </div>   
+       <div style="grid-area: desc;" class="normalForm form-group">
+        <label for="descricao">Descrição</label>
+        <input required type="text" class="form-control" [formControlName]="'descricao'" id="descricao" [value]="doacao.Descricao" >
+      </div>
+      <div style="grid-area: foto;" class="normalForm form-group">
+        <label for="foto">Fotos</label>
+        <input required type="file" multiple class="form-control" [formControlName]="'fotoAnimal'" id="fotoAnimal" [value]="doacao.Animal.Foto"(change)="onAddFoto($event)" >
+      </div>
+      <div style="grid-area: nome;" class="normalForm form-group">
+        <label for="nomeAnimal">Nome do Animal</label>
+        <input required type="text" class="form-control" [formControlName]="'nomeAnimal'" id="nomeAnimal" [value]="doacao.Animal.Nome" >
+      </div>
+      <div style="grid-area: peso;" class="normalForm form-group">
+        <label for="peso">Peso do Animal</label>
+        <input required type="number" class="form-control" [formControlName]="'pesoAnimal'" id="pesoAnimal" [value]="doacao.Animal.Peso" >
+      </div>
+    <div style="grid-area: idade;" class="normalForm form-group">
+      <label for="idade">Idade do animal</label>
+      <input required type="number" class="form-control" [formControlName]="'idadeAnimal'" id="idadeAnimal" [value]="doacao.Animal.Idade">
+    </div>    
+    <div style="grid-area: sexo;" class="normalForm form-group">
+        <label for="sexo">Sexo do animal</label>
+        <select required class="form-control" [formControlName]="'sexoAnimal'" id="sexoAnimal" [value]="doacao.Animal.Sexo">
+            <option [value]="1">Masculino</option>
+            <option [value]="2">Feminino</option>
+        </select>
+      </div>
+      <div style="grid-area: porte;" class="normalForm form-group">
+          <label for="porte">Porte do animal</label>
+          <select required class="form-control" [formControlName]="'porteAnimal'" id="porteAnimal" [value]="doacao.Animal.Porte">
+              <option [value]="1">Pequeno</option>
+              <option [value]="2">Medio</option>
+              <option [value]="3">Grande</option>
+          </select>
+        </div>
+        <div style="grid-area: tipo;" class="normalForm form-group">
+            <label for="porte">Tipo do animal</label>
+            <select required class="form-control" [formControlName]="'tipoAnimal'" id="tipoAnimal" [value]="doacao.Animal.TipoAnimal">
+                <option [value]="1">Cachorro</option>
+                <option [value]="2">Gato</option>
+            </select>
+          </div>
+          <div style="grid-area: raca;" class="normalForm form-group">
+              <label>Raça do animal</label>
+              <select id= "racaSelect" (change)=onChangeRaca($event) required class="form-control">
+                <option *ngFor="let raca of racas" [value]="getRacaId(raca)">
+                    {{getNomeRaca(raca)}}
+                </option>
+              </select>
+            </div>
+  
+    <button style="grid-area: submit;" type="submit" class="btn btn-primary mt-4" value="Salvar"> Salvar</button>
+  
+  </form>
