@@ -86,9 +86,11 @@ getRacaId(raca:any){
   onSubmit(form:any) {
     this.doacao.Animal.Raca.Id = parseInt((document.getElementById("racaSelect") as HTMLInputElement).value);
     var newDoacao = new Doacao();
+    newDoacao.Id = this.doacao.id;
     newDoacao.Localizacao = this.formDoacao?.value.localizacao;
     newDoacao.Descricao = this.formDoacao?.value.descricao;
     newDoacao.Animal = new Animal();
+    newDoacao.Animal.Id = this.doacao.animal.id;
     newDoacao.Animal.Nome =this.formDoacao?.value.nomeAnimal;
     newDoacao.Animal.Status = this.status;
     newDoacao.Animal.Peso =this.formDoacao?.value.pesoAnimal;

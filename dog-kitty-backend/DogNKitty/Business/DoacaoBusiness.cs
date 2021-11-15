@@ -42,16 +42,19 @@ namespace Business
 
         public int UpdateDoacao(DoacaoDto Doacao)
         {
-            animalCustomRepository.InstertOrUpdate(animalMapper.DtoToEntity(Doacao.Animal),Doacao.Animal.Id);
-            return doacaoRepository.InstertOrUpdate(mapper.DtoToEntity(Doacao),Doacao.Id);
+            animalCustomRepository.InstertOrUpdate(animalMapper.DtoToEntity(Doacao.Animal), new { id= Doacao.Animal.Id});
+            return doacaoRepository.InstertOrUpdate(mapper.DtoToEntity(Doacao), new { id = Doacao.Id });
         }
 
 
         public void DeleteDoacaoById(DoacaoDto doacao)
         {
-            foreach (var foto in doacao.Animal.Foto)
+            if (doacao.Animal.Foto != null)
             {
-                animalCustomRepository.Remove(new { foto.Id });
+                foreach (var foto in doacao.Animal.Foto)
+                {
+                    fotoRepository.Remove(new { foto.Id });
+                }
             }
             animalCustomRepository.Remove(new { doacao.Animal.Id});
             doacaoRepository.Remove(new { doacao.Id });

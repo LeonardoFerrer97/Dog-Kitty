@@ -15,6 +15,7 @@ export class AdoptionService {
   }
 
 public updateDoacao(adocao: Doacao){
+  console.log(adocao)
   return this.httpClient.put(`${this.apiURL}`,adocao);
 }
 
