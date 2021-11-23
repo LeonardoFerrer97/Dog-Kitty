@@ -15,7 +15,6 @@ export class BarComponent implements OnInit {
   user:Usuario | undefined;
   isLoggedIn=false;
   constructor(public auth: AuthService,public userService: UserService, public router:Router) {
-    console.log("constructor")
     this.auth.user$.subscribe(
       (profile) => {
       if(profile!=null){
@@ -38,7 +37,6 @@ export class BarComponent implements OnInit {
   }
 
   ngOnInit(): void {    
-    console.log("init");
   }
 
   onClickText(click:string){

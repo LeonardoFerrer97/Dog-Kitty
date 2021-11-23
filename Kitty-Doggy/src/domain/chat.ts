@@ -7,5 +7,5 @@ export class Chat {
         Title : string | undefined;
         Messages : Array<ChatMessages> | undefined;
         Date : Date | undefined;
-        UserId: number | undefined;
+        UsuarioId: number | undefined;
 }

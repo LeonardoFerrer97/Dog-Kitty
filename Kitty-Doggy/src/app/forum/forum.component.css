@@ -1,13 +1,21 @@
 .container{
     display: flex;
-    flex-direction: row;
-    height: 100%;
+    flex-direction: column;
+    min-height: 80vh;
     width: 100%;
+    margin-top: 70px;
 }
 .chat{ 
     flex-grow: 1;
     background: #FFFFFF;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    margin: 10px;
+    margin-left: 50px;
+    margin-right: 50px;
+    max-height: 70px;
+    cursor:pointer;
+    justify-content: space-evenly;
+    display: flex;
 }
     .button {
         color:white;
@@ -19,9 +27,23 @@
         flex-grow:1;
       }
 .title{
-
+    color:#FE5F55
 }
+.filter{
 
+    
+    flex-grow: 1;
+    background: transparent;
+    margin: 10px;
+    margin-left: 50px;
+    margin-right: 50px;
+    max-height: 70px;
+    cursor:pointer;
+    justify-content: flex-end;
+    display: flex;
+}
+.filtro{
+}
 .button-container{
     cursor: pointer;
     align-items: flex-end;

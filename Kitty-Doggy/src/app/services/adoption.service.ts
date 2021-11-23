@@ -15,7 +15,6 @@ export class AdoptionService {
   }
 
 public updateDoacao(adocao: Doacao){
-  console.log(adocao)
   return this.httpClient.put(`${this.apiURL}`,adocao);
 }
 
@@ -30,7 +29,6 @@ public getDoacaoById(id: number){
 
 public getDoacaos(url: string,status){
   url = this.apiURL+"/"+ status + url;
-  console.log(url);
   return this.httpClient.get<Doacao[]>(`${url}`);
 }
 }

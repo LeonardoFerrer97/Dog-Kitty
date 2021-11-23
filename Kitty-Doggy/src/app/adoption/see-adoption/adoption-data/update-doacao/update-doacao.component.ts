@@ -50,7 +50,6 @@ export class UpdateDoacaoComponent implements OnInit {
     this.doacao.Animal = new Animal();
     this.doacao.Animal.Foto = new Array<Foto>();
     this.doacao.Animal.Raca = new Raca();
-    console.log(this.doacao)
     this.formDoacao = new FormGroup({
       localizacao: new FormControl(this.doacao.localizacao? this.doacao.localizacao : ""),
       descricao: new FormControl(this.doacao.descricao? this.doacao.descricao : ""),

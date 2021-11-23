@@ -1,5 +1,12 @@
-<div class="container">
-    <div *ngFor="let chat of chatsToDisplay;let indexOfelement=index;">
+<div class="container"> 
+    
+    <mat-form-field class="filter">
+
+    <input matInput class="filtro"
+            (input)="onFiltro($event)"[(ngModel)]="filtro" [value]="filtro" placeholder="filtrar" >
+
+        </mat-form-field>
+    <div  class="chat" *ngFor="let chat of chatsToDisplay;let indexOfelement=index;">
         <p class="title">{{chat.title}}</p>
     </div>
     <div class="button-container"> 
@@ -9,7 +16,7 @@
 </div>
 
 <mat-paginator [length]="chats?.length"
-[pageSize]="6"
+[pageSize]="5"
 aria-label="Select page"
 class="paginator"
 

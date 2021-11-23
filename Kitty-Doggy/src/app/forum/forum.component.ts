@@ -11,11 +11,16 @@ import { NewChatModalComponent } from './new-chat-modal/new-chat-modal.component
   styleUrls: ['./forum.component.css']
 })
 export class ForumComponent implements OnInit {
-
+  filtro:string;
   chats:any[];
   chatsToDisplay:any[];
+  chatsAux:any[];
+  user:any;
   constructor(public router: Router,public chatService: ChatService,public dialog: MatDialog,public dialogNewChat: MatDialog) {
-    this.getChats(); }
+    this.getChats(); 
+
+    this.user = this.router?.getCurrentNavigation()?.extras?.state?.user;    
+  }
 
   ngOnInit(): void {
   }
@@ -27,21 +32,21 @@ export class ForumComponent implements OnInit {
     this.chatService.getChats().subscribe(chats=>{
       this.chats =chats;
       this.chatsToDisplay= Array.from(this.chats);
-      this.chatsToDisplay = this.chatsToDisplay.splice(0,6);
+      this.chatsToDisplay = this.chatsToDisplay.splice(0,4);
+      this.chatsAux = this.chatsToDisplay;
       dialogRef.close();
     },error=>{ dialogRef.close();});
   }
-
+  onFiltro(event){
+    this.chatsToDisplay = this.chatsAux;
+    this.chatsToDisplay = this.chats.filter(item =>
+      item.title.toLowerCase().includes(this.filtro.toLowerCase())
+  ).splice(0,4);
+  }
   onChangePage(page){
     this.chatsToDisplay= Array.from(this.chats);
-    var index = page.pageIndex*6;
-    if(index+5>this.chatsToDisplay.length){
-      this.chatsToDisplay = this.chatsToDisplay.splice(index,index+5); 
-    }
-    else if(index+4>this.chatsToDisplay.length){
-      this.chatsToDisplay = this.chatsToDisplay.splice(index,index+4); 
-    }
-    else if(index+3>this.chatsToDisplay.length){
+    var index = page.pageIndex*4;
+    if(index+3>this.chatsToDisplay.length){
       this.chatsToDisplay = this.chatsToDisplay.splice(index,index+3); 
     }
     else if(index+2>this.chatsToDisplay.length){
@@ -50,21 +55,16 @@ export class ForumComponent implements OnInit {
     else if(index+1>this.chatsToDisplay.length){
       this.chatsToDisplay =this.chatsToDisplay.splice(index,index+1); 
     }else{
-      this.chatsToDisplay =this.chatsToDisplay.splice(index,index+6); 
+      this.chatsToDisplay =this.chatsToDisplay.splice(index,index+4); 
     }
   }
   createNewChat(){
     
     var dialogConfig = new MatDialogConfig();
-    var localizacao=null;
-    var raca = null;
-    var porte = null;
-    var sexo= null;
-    var tipo=null;
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;        
     dialogConfig.data = {
-      localizacao,raca,porte,sexo,tipo
+      user:this.user
     };
     const dialogRef = this.dialogNewChat.open(NewChatModalComponent,
       dialogConfig);

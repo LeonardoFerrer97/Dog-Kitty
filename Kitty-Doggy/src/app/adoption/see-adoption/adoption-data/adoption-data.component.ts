@@ -20,7 +20,6 @@ export class AdoptionDataComponent implements OnInit {
   status;
   constructor(public router: Router,public doacaoService: AdoptionService) { 
     this.doacao = this.router?.getCurrentNavigation()?.extras?.state?.doacao;
-    console.log(this.doacao)
     this.isMyAdoption = this.router?.getCurrentNavigation()?.extras?.state?.isMyAdoption;
     this.user = this.router?.getCurrentNavigation()?.extras?.state?.user;
     this.status = this.router?.getCurrentNavigation()?.extras?.state?.status;

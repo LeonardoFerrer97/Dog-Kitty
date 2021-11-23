@@ -25,15 +25,11 @@ export class NewChatModalComponent implements OnInit {
       public router:Router,
       public chatService: ChatService,
       private dialogRef: MatDialogRef<NewChatModalComponent>,
-      @Inject(MAT_DIALOG_DATA) {title}) {
+      @Inject(MAT_DIALOG_DATA) {user}) {
         this.form = fb.group({
-          title: [title]
+          title: ""
         });
-        this.user = this.router?.getCurrentNavigation()?.extras?.state?.user;    
-        //if(this.user == undefined){
-          //this.router.navigate(['']);
-        //}
-
+        this.user = user;
   }
 
   ngOnInit() {
@@ -43,10 +39,8 @@ export class NewChatModalComponent implements OnInit {
   save() {
     var chat = new Chat();
     chat.Date = new Date();
-    console.log(this.form);
-    console.log(this.user);
     chat.Title = this.form.value.title;
-    chat.UserId = this.user.id;
+    chat.UsuarioId = this.user.id;
     let dialogRef: MatDialogRef<MatSpinnerComponent> = this.dialog.open(MatSpinnerComponent, {
       panelClass: 'transparent',
       disableClose: true
