@@ -9,6 +9,7 @@ namespace Dto
         public string Title { get; set; }
         public List<ChatMessagesDto> Messages { get; set; }
         public UsuarioDto Usuario { get; set; }
+        public int UsuarioId { get; set; }
         public DateTime Date { get; set; }
     }
 }

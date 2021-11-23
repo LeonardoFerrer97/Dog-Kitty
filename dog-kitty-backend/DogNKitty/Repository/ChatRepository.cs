@@ -31,19 +31,28 @@ namespace Repository
                     sql += "WHERE title LIKE %" + title + "%";
                 }
                 var dictionaryChat = new Dictionary<int, Chat>();
-                var result = conn.Query<Chat, Usuario, Chat>(sql, (c,u) =>
+                var result = conn.Query<Chat, Usuario,ChatMessages,Usuario, Chat>(sql, (c,u,cm,ucm) =>
                 {
                     if (!dictionaryChat.TryGetValue(c.Id, out Chat aEntry))
                     {
                         aEntry = c;
+                        aEntry.Messages = new List<ChatMessages>();
                         dictionaryChat.Add(aEntry.Id, aEntry);
                     }
                     if (u!= null)
                     {
                         aEntry.Usuario = u;
                     }
+                    if (cm != null)
+                    {
+                        if (ucm != null)
+                        {
+                            cm.Usuario = ucm;
+                        }
+                        aEntry.Messages.Add(cm);
+                    }
                     return aEntry;
-                }, null, splitOn: "id,id,id").AsList();
+                }, null, splitOn: "id,id,id,id").AsList();
                 return result;
             }
         }

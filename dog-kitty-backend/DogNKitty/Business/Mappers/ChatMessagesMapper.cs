@@ -10,21 +10,27 @@ namespace Business.Mappers
         private readonly UsuarioMapper mapper = new UsuarioMapper();
         public ChatMessagesDto EntityToDto(ChatMessages chatMessage)
         {
-            return new ChatMessagesDto()
+            if (chatMessage != null)
             {
-                Id = chatMessage.Id,
-                Usuario = mapper.EntityToDto(chatMessage.Usuario),
-                Message = chatMessage.Message,
-                Date = chatMessage.Date,
-            };
+                return new ChatMessagesDto()
+                {
+                    Id = chatMessage.Id,
+                    Usuario = mapper.EntityToDto(chatMessage.Usuario),
+                    Message = chatMessage.Message,
+                    Date = chatMessage.Date,
+                };
+            }return null;
         }
         public List<ChatMessagesDto> ListEntityToListDto(IEnumerable<ChatMessages> chatMessages)
         {
             List<ChatMessagesDto> dtos = new List<ChatMessagesDto>();
-            foreach (var chatMessage in chatMessages)
+            if (chatMessages != null)
             {
-                dtos.Add(EntityToDto(chatMessage));
+                foreach (var chatMessage in chatMessages)
+                {
+                    dtos.Add(EntityToDto(chatMessage));
 
+                }
             }
             return dtos;
         }
@@ -42,11 +48,13 @@ namespace Business.Mappers
 
         public List<ChatMessages> ListDtoToListEntity(IEnumerable<ChatMessagesDto> chatMessages)
         {
-            List<ChatMessages> dtos = new List<ChatMessages>();
-            foreach (var chatMessage in chatMessages)
+            List<ChatMessages> dtos = new List<ChatMessages>(); if (chatMessages != null)
             {
-                dtos.Add(DtoToEntity(chatMessage));
+                foreach (var chatMessage in chatMessages)
+                {
+                    dtos.Add(DtoToEntity(chatMessage));
 
+                }
             }
             return dtos;
         }

@@ -7,6 +7,7 @@ namespace Business.Mappers
     public class ChatMapper
     {
         private readonly ChatMessagesMapper mapper = new ChatMessagesMapper();
+        private readonly UsuarioMapper usuarioMapper = new UsuarioMapper();
         public ChatDto EntityToDto(Chat chat)
         {
             return new ChatDto()
@@ -14,7 +15,9 @@ namespace Business.Mappers
                 Id = chat.Id,
                 Messages = mapper.ListEntityToListDto(chat.Messages),
                 Date = chat.Date,
-                Title = chat.Title
+                Usuario = usuarioMapper.EntityToDto(chat.Usuario),
+                Title = chat.Title,
+                UsuarioId = chat.Usuario_Id
             };
         }
         public List<ChatDto> ListEntityToListDto(IEnumerable<Chat> chats)
@@ -34,8 +37,10 @@ namespace Business.Mappers
             {
                 Id = chat.Id,
                 Messages = mapper.ListDtoToListEntity(chat.Messages),
+                Usuario = usuarioMapper.DtoToEntity(chat.Usuario),
                 Date = chat.Date,
-                Title = chat.Title
+                Title = chat.Title,
+                Usuario_Id = chat.UsuarioId
             };
         }
         public List<Chat> ListDtoToListEntity(IEnumerable<ChatDto> chats)

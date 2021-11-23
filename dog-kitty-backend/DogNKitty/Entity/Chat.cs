@@ -9,6 +9,7 @@ namespace Entity
         public string Title { get; set; }
         public List<ChatMessages> Messages { get; set; }
         public Usuario Usuario { get; set; }
+        public int Usuario_Id { get; set; }
         public DateTime Date { get; set; }
     }
 }

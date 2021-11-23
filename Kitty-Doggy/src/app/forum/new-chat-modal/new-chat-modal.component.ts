@@ -43,6 +43,8 @@ export class NewChatModalComponent implements OnInit {
   save() {
     var chat = new Chat();
     chat.Date = new Date();
+    console.log(this.form);
+    console.log(this.user);
     chat.Title = this.form.value.title;
     chat.UserId = this.user.id;
     let dialogRef: MatDialogRef<MatSpinnerComponent> = this.dialog.open(MatSpinnerComponent, {

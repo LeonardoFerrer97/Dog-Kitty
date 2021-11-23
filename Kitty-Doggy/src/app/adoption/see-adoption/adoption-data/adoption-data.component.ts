@@ -7,6 +7,7 @@ import { AnimalEnum } from 'src/domain/enum/animalEnum';
 import { PorteEnum } from 'src/domain/enum/porteEnum';
 import { SexoEnum } from 'src/domain/enum/sexoEnum';
 import { StatusEnum } from 'src/domain/enum/statusEnum';
+import { Foto } from 'src/domain/foto';
 
 @Component({
   selector: 'app-adoption-data',
@@ -63,6 +64,8 @@ export class AdoptionDataComponent implements OnInit {
     newDoacao.Id = this.doacao.id;
     newDoacao.Animal = new Animal();
     newDoacao.Animal.Id= this.doacao.animal.id;
+    newDoacao.Animal.Foto = new Array<Foto>();
+    
     this.doacaoService.deleteDoacao(this.doacao).subscribe(()=>{
       this.router.navigate(["myadoptions"],{state:{status:this.status,user:this.user}});  
     })

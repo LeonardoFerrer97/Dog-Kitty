@@ -1,5 +1,4 @@
 <div class="container">
-    <div style="grid-area:a"></div>
     <img class="img" style="grid-area:img" src="{{doacao.animal.foto[0].imagem}}"/>
     <div class="text" style="grid-area:text">
         <p>Dados do animal:</p>
@@ -22,10 +21,8 @@
         <li>Endereço: {{doacao.usuario.endereco}}</li>
     </ul>
     </div>
-    <div style="grid-area:b">
-    <div *ngIf="isMyAdoption" class="buttons">
-        <button (click)="DeleteDoacao()">Deletar</button>
-        <button (click)="UpdateDoacao()">Modificar</button>
-    </div>
+    <div class="buttons">
+        <button *ngIf="isMyAdoption" class="deletar"(click)="DeleteDoacao()">Deletar</button>
+        <button *ngIf="isMyAdoption" class="update"(click)="UpdateDoacao()">Modificar</button>
     </div>
 </div>

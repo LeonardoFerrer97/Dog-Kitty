@@ -7,16 +7,19 @@ namespace Business.Mappers
     public class UsuarioMapper
     {
             public UsuarioDto EntityToDto(Usuario usuario)
+        {
+            if (usuario != null)
             {
                 return new UsuarioDto()
                 {
                     Id = usuario.Id,
                     Contato = usuario.Contato,
                     Email = usuario.Email,
-                    Endereco =usuario.Endereco,
+                    Endereco = usuario.Endereco,
                     IsAdmin = usuario.IsAdmin,
-                    Nome=usuario.Nome
+                    Nome = usuario.Nome
                 };
+            }return null;
             }
             public List<UsuarioDto> ListEntityToListDto(IEnumerable<Usuario> usuarios)
             {
@@ -31,6 +34,8 @@ namespace Business.Mappers
 
             public Usuario DtoToEntity(UsuarioDto usuario)
             {
+            if (usuario != null)
+            {
                 return new Usuario()
                 {
                     Id = usuario.Id,
@@ -40,6 +45,7 @@ namespace Business.Mappers
                     IsAdmin = usuario.IsAdmin,
                     Nome = usuario.Nome
                 };
+            }return null;
             }
 
             public List<Usuario> ListDtoToListEntity(IEnumerable<UsuarioDto> usuarios)

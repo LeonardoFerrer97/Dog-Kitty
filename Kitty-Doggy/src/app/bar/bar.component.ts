@@ -14,28 +14,31 @@ import { UserService } from '../services/user.service';
 export class BarComponent implements OnInit {
   user:Usuario | undefined;
   isLoggedIn=false;
-  constructor(public auth: AuthService,public userService: UserService, public router:Router) {}
+  constructor(public auth: AuthService,public userService: UserService, public router:Router) {
+    console.log("constructor")
+    this.auth.user$.subscribe(
+      (profile) => {
+      if(profile!=null){
+        this.isLoggedIn=true;
+      this.userService.getUserByEmail(profile?.email).subscribe((user)=>{
+        if(!user){
+          var newUser = new Usuario();
+          newUser.Email = profile?.email;
+          newUser.IsAdmin = false;
+          newUser.Nome = profile?.name;
+          this.userService.createUser(newUser).subscribe();
+          this.user=newUser;
+        }else{
+         this.user = user;
+        }
+      });
+    }    
+      }
+    );
+  }
 
   ngOnInit(): void {    
-    this.auth.user$.subscribe(
-    (profile) => {
-    if(profile!=null){
-      this.isLoggedIn=true;
-    this.userService.getUserByEmail(profile?.email).subscribe((user)=>{
-      if(!user){
-        var newUser = new Usuario();
-        newUser.Email = profile?.email;
-        newUser.IsAdmin = false;
-        newUser.Nome = profile?.name;
-        this.userService.createUser(newUser).subscribe();
-        this.user=newUser;
-      }else{
-       this.user = user;
-      }
-    });
-  }    
-    }
-  );
+    console.log("init");
   }
 
   onClickText(click:string){
