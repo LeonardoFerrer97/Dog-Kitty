@@ -1,0 +1,16 @@
+<div class="container"> 
+    
+    <div class="chat" *ngFor="let messages of chat;let indexOfelement=index;">
+        <p class="title">{{messages}}</p>
+    </div>
+    <div class="button-container"> 
+        
+    <mat-form-field class="newMessage">
+
+        <input matInput  [(ngModel)]="newMessage" [value]="newMessage" placeholder="Nova mensagem" >
+    
+            </mat-form-field>
+    <button class="button" 
+    (click)="createNewMessage()"> Criar novo chat</button>
+</div>
+</div>

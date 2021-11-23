@@ -16,6 +16,8 @@ namespace Business.Mappers
                 {
                     Id = chatMessage.Id,
                     Usuario = mapper.EntityToDto(chatMessage.Usuario),
+                    Usuario_id = chatMessage.Usuario_id,
+                    Chat_id = chatMessage.Chat_id,
                     Message = chatMessage.Message,
                     Date = chatMessage.Date,
                 };
@@ -41,6 +43,8 @@ namespace Business.Mappers
             {
                 Id = chatMessage.Id,
                 Usuario = mapper.DtoToEntity(chatMessage.Usuario),
+                Usuario_id = chatMessage.Usuario_id,
+                Chat_id = chatMessage.Chat_id,
                 Message = chatMessage.Message,
                 Date = chatMessage.Date,
             };

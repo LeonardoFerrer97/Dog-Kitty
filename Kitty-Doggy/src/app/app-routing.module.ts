@@ -9,6 +9,7 @@ import { SeeAdoptionComponent } from './adoption/see-adoption/see-adoption.compo
 import { AdoptionDataComponent } from './adoption/see-adoption/adoption-data/adoption-data.component';
 import { ForumComponent } from './forum/forum.component';
 import { UpdateDoacaoComponent } from './adoption/see-adoption/adoption-data/update-doacao/update-doacao.component';
+import { ChatComponent } from './forum/chat/chat.component';
 
 const routes: Routes = [
   {
@@ -54,6 +55,10 @@ const routes: Routes = [
   {
     path: 'forum',
     component: ForumComponent,
+  },
+  {
+    path: 'forum/chat',
+    component: ChatComponent,
   },
   
 ];

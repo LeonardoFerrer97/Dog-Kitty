@@ -45,7 +45,7 @@ namespace DogNKitty.Controllers
             return chatBusiness.InsertChat(doacaos);
         }
 
-        [HttpPost("message/{usuarioId}")]
+        [HttpPost("message")]
         public ActionResult<int> PostMessage([FromBody] ChatMessagesDto message)
         {
             return chatBusiness.InsertChatMessage(message);

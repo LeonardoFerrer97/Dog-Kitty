@@ -11,13 +11,16 @@ namespace Business
     public class ChatBusiness
     {
         private readonly ChatMapper mapper = new ChatMapper();
+        private readonly ChatMessagesMapper chatMessagemapper = new ChatMessagesMapper();
         private readonly Repository<Chat> chatRepository;
+        private readonly Repository<ChatMessages> chatMessageRepository;
         private readonly ChatRepository chatRepositoryCustom;
 
         public ChatBusiness(string connection)
         {
             chatRepository = new Repository<Chat>(connection);
             chatRepositoryCustom = new ChatRepository(connection);
+            chatMessageRepository = new Repository<ChatMessages>(connection);
         }
 
 
@@ -75,7 +78,7 @@ namespace Business
         }
         public int InsertChatMessage(ChatMessagesDto Message)
         {
-            return 1;
+            return chatMessageRepository.Add(chatMessagemapper.DtoToEntity(Message));
         }
 
 

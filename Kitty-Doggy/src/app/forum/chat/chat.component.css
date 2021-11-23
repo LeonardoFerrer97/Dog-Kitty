@@ -12,7 +12,7 @@
     margin: 10px;
     margin-left: 50px;
     margin-right: 50px;
-    max-height: 70px;
+    max-height: 30px;
     cursor:pointer;
     justify-content: space-evenly;
     display: flex;
@@ -25,6 +25,10 @@
         border: 1px;
         background-color: #FE5F55;
         flex-grow:1;
+      }
+      .newMessage{
+          flex-grow: 3;
+          margin-right: 30px;
       }
 .title{
     color:#FE5F55
@@ -44,11 +48,9 @@
 }
 .button-container{
     cursor: pointer;
-    align-items: flex-end;
     display: flex;
-    flex-direction: column;
-    align-self: flex-end;
-    width: 100%;
-    margin-bottom: 3%;
-    margin-right: 3%;
+    flex-direction: row;
+    min-width: 95vw;
+    margin: 15px;
+    margin-top: 30px;
 }

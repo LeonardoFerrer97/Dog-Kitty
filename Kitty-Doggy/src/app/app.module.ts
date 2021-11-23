@@ -27,6 +27,7 @@ import { ForumComponent } from './forum/forum.component';
 import { NewChatModalComponent } from './forum/new-chat-modal/new-chat-modal.component';
 import { UpdateDoacaoComponent } from './adoption/see-adoption/adoption-data/update-doacao/update-doacao.component';
 import { AdoptionService } from './services/adoption.service';
+import { ChatComponent } from './forum/chat/chat.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,6 +42,7 @@ import { AdoptionService } from './services/adoption.service';
     ForumComponent,
     NewChatModalComponent,
     UpdateDoacaoComponent,
+    ChatComponent,
   ],
   imports: [
     BrowserModule,

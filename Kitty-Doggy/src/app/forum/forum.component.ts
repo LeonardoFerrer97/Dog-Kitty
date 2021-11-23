@@ -58,6 +58,9 @@ export class ForumComponent implements OnInit {
       this.chatsToDisplay =this.chatsToDisplay.splice(index,index+4); 
     }
   }
+  clickOnChat(chat){
+    this.router.navigate(["forum/chat"],{state:{chat:chat,user:this.user}});   
+  }
   createNewChat(){
     
     var dialogConfig = new MatDialogConfig();
