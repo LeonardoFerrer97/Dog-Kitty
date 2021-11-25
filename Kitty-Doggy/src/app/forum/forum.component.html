@@ -6,9 +6,13 @@
             (input)="onFiltro($event)"[(ngModel)]="filtro" [value]="filtro" placeholder="filtrar" >
 
         </mat-form-field>
-    <div  (click)="clickOnChat(chat)" class="chat" *ngFor="let chat of chatsToDisplay;let indexOfelement=index;">
-        <p class="title">{{chat.title}}</p>
+    <div   class="chat" *ngFor="let chat of chatsToDisplay;let indexOfelement=index;">
+        <p (click)="clickOnChat(chat)" class="title">{{chat.title}}</p>        
+        <button class="icon" *ngIf="(chat.usuario.id==user.id ||user.isAdmin) && chat.id !==null" mat-icon-button (click)="deleteChat(chat.id)">
+            <mat-icon>delete_forever</mat-icon>
+      </button>
     </div>
+    
     <div class="button-container"> 
     <button class="button" 
     (click)="createNewChat()"> Criar novo chat</button>
@@ -16,7 +20,7 @@
 </div>
 
 <mat-paginator [length]="chats?.length"
-[pageSize]="5"
+[pageSize]="4"
 aria-label="Select page"
 class="paginator"
 

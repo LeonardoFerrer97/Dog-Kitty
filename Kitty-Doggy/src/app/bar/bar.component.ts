@@ -12,7 +12,7 @@ import { UserService } from '../services/user.service';
   styleUrls: ['./bar.component.css']
 })
 export class BarComponent implements OnInit {
-  user:Usuario | undefined;
+  user:any | undefined;
   isLoggedIn=false;
   constructor(public auth: AuthService,public userService: UserService, public router:Router) {
     this.auth.user$.subscribe(
@@ -58,6 +58,8 @@ export class BarComponent implements OnInit {
       this.router.navigate(["create-lost"],{state:{status:StatusEnum.Perdido,user:this.user}});   
      }else if(click=="forum"){
       this.router.navigate(["forum"],{state:{user:this.user}});   
+     }else if(click=="user-control"){
+      this.router.navigate(["user-control"],{state:{user:this.user}});   
      }
     
   }

@@ -6,17 +6,28 @@
     margin-top: 70px;
 }
 .chat{ 
-    flex-grow: 1;
     background: #FFFFFF;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     margin: 10px;
     margin-left: 50px;
     margin-right: 50px;
-    max-height: 30px;
     cursor:pointer;
     justify-content: space-evenly;
     display: flex;
 }
+.icon{
+    padding-right: 30px;
+ 
+ justify-content: right;
+ align-self: center;
+ color: #FE5F55;
+ cursor: pointer;
+ display: flex;
+ flex-direction: row;
+ flex-grow: 1;
+ background: transparent;
+ border: none;
+ }
     .button {
         color:white;
         max-width: 30%;
@@ -31,7 +42,8 @@
           margin-right: 30px;
       }
 .title{
-    color:#FE5F55
+    color:#FE5F55;
+    margin-left:30px;
 }
 .filter{
 

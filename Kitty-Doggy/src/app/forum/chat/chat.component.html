@@ -1,7 +1,10 @@
 <div class="container"> 
     
-    <div class="chat" *ngFor="let messages of chat;let indexOfelement=index;">
-        <p class="title">{{messages}}</p>
+    <div class="chat" *ngFor="let messages of messagesToDisplay;let indexOfelement=index;">
+        <p class="title">{{messages.usuario.nome}} disse: {{messages.message}}</p>
+        <button class="icon" *ngIf="(messages.usuario.id==user.id ||user.isAdmin) && messages.id !==null" mat-icon-button (click)="deleteMessage(messages.id)">
+            <mat-icon>delete_forever</mat-icon>
+      </button>
     </div>
     <div class="button-container"> 
         
@@ -11,6 +14,14 @@
     
             </mat-form-field>
     <button class="button" 
-    (click)="createNewMessage()"> Criar novo chat</button>
+    (click)="createNewMessage()"> Enviar nova mensagem</button>
 </div>
 </div>
+
+<mat-paginator [length]="chat?.messages?.length"
+[pageSize]="5"
+aria-label="Select page"
+class="paginator"
+
+(page)="onChangePage($event)">
+</mat-paginator>

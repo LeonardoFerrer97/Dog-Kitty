@@ -1,0 +1,24 @@
+<div class="container"> 
+    
+    <mat-form-field class="filter">
+
+    <input matInput class="filtro"
+            (input)="onFiltro($event)"[(ngModel)]="filtro" [value]="filtro" placeholder="filtrar" >
+
+        </mat-form-field>
+    <div   class="user" *ngFor="let usuario of usersToDisplay;let indexOfelement=index;">
+        <p class="title">Nome: {{usuario.nome}}</p>
+        <p class="title">E-mail: {{usuario.email}}</p>  
+        <button class="icon" mat-icon-button (click)="deleteUser(usuario.id)">
+            <mat-icon>delete_forever</mat-icon>
+      </button>
+    </div>
+</div>
+
+<mat-paginator [length]="users?.length"
+[pageSize]="4"
+aria-label="Select page"
+class="paginator"
+
+(page)="onChangePage($event)">
+</mat-paginator>

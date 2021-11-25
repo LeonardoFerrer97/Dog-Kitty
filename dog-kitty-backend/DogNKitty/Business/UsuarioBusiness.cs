@@ -12,10 +12,18 @@ namespace Business
     {
         private readonly UsuarioMapper mapper = new UsuarioMapper();
         private readonly Repository<Usuario> usuarioRepository;
+        private readonly Repository<Chat> chatRepository;
+        private readonly Repository<ChatMessages> chatMessagesRepository;
+        private readonly Repository<Doacao> doacaoRepository;
+        private readonly Repository<Animal> animalRepository;
 
         public UsuarioBusiness(string connection)
         {
             usuarioRepository = new Repository<Usuario>(connection);
+            chatRepository = new Repository<Chat>(connection);
+            chatMessagesRepository = new Repository<ChatMessages>(connection);
+            doacaoRepository = new Repository<Doacao>(connection);
+            animalRepository = new Repository<Animal>(connection);
         }
 
 
@@ -55,6 +63,17 @@ namespace Business
 
         public void DeleteUsuarioById(int Id)
         {
+            chatMessagesRepository.Remove(new { usuario_id = Id });
+            chatRepository.Remove(new { usuario_id = Id });
+            var doacoes = doacaoRepository.GetData(new { usuario_id = Id });
+            if (doacoes != null)
+            {
+                foreach(var doacao in doacoes)
+                {
+                    animalRepository.Remove(new { doacao_id = doacao.Id });
+                }
+            }
+            doacaoRepository.Remove(new { usuario_id = Id });
             usuarioRepository.Remove(new { Id });
         }
 

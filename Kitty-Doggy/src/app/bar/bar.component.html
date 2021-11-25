@@ -2,12 +2,14 @@
     <p class="text" (click)="onClickText('home')">KittyNDoggy</p>
     <p class="text" (click)="onClickText('doacao')">Adoção</p>
     <p class="text" (click)="onClickText('perdido')">Pets Perdidos</p>
-    <p  class="text" (click)="onClickText('forum')">Forúm</p>
+    <p  *ngIf="isLoggedIn" class="text" (click)="onClickText('forum')">Forúm</p>
     <button class="icon" mat-icon-button [matMenuTriggerFor]="menu" >
         <mat-icon>account_circle</mat-icon>
       </button>
       <mat-menu #menu="matMenu" overlapTrigger="false" xPosition="before">
         <button *ngIf="!isLoggedIn" (click)="Login()"  mat-menu-item>Login
+        </button>
+        <button *ngIf="isLoggedIn && user.isAdmin" (click)="onClickText('user-control')"  mat-menu-item>Controle de usuarios
         </button>
         <button *ngIf="isLoggedIn" (click)="onClickText('updatedata')"  mat-menu-item>Atualizar dados
         </button>

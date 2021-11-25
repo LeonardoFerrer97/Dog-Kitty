@@ -38,22 +38,25 @@ namespace Repository
                         aEntry = c;
                         aEntry.Messages = new List<ChatMessages>();
                         dictionaryChat.Add(aEntry.Id, aEntry);
-                    }
-                    if (u!= null)
-                    {
-                        aEntry.Usuario = u;
+                        if (u != null)
+                        {
+                            aEntry.Usuario = u;
+                        }
                     }
                     if (cm != null)
                     {
-                        if (ucm != null)
-                        {
-                            cm.Usuario = ucm;
+                        if(!aEntry.Messages.Contains(cm)){
+
+                            if (ucm != null)
+                            {
+                                cm.Usuario = ucm;
+                            }
+                            aEntry.Messages.Add(cm);
                         }
-                        aEntry.Messages.Add(cm);
                     }
                     return aEntry;
                 }, null, splitOn: "id,id,id,id").AsList();
-                return result;
+                return dictionaryChat.Values.ToList();
             }
         }
     }

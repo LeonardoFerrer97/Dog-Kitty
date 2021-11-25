@@ -10,6 +10,7 @@ import { AdoptionDataComponent } from './adoption/see-adoption/adoption-data/ado
 import { ForumComponent } from './forum/forum.component';
 import { UpdateDoacaoComponent } from './adoption/see-adoption/adoption-data/update-doacao/update-doacao.component';
 import { ChatComponent } from './forum/chat/chat.component';
+import { UserControlComponent } from './user-control/user-control.component';
 
 const routes: Routes = [
   {
@@ -57,8 +58,12 @@ const routes: Routes = [
     component: ForumComponent,
   },
   {
-    path: 'forum/chat',
+    path: 'forum/chat/:id',
     component: ChatComponent,
+  },
+  {
+    path: 'user-control',
+    component: UserControlComponent,
   },
   
 ];

@@ -62,5 +62,11 @@ namespace DogNKitty.Controllers
         {
             chatBusiness.DeleteChatById(id);
         }
+
+        [HttpDelete("message/{id}")]
+        public void DeleteMessage(int id)
+        {
+            chatBusiness.DeleteChatMessage(id);
+        }
     }
 }

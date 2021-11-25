@@ -16,10 +16,14 @@ export class ForumComponent implements OnInit {
   chatsToDisplay:any[];
   chatsAux:any[];
   user:any;
+  pages = null
   constructor(public router: Router,public chatService: ChatService,public dialog: MatDialog,public dialogNewChat: MatDialog) {
     this.getChats(); 
 
-    this.user = this.router?.getCurrentNavigation()?.extras?.state?.user;    
+    this.user = this.router?.getCurrentNavigation()?.extras?.state?.user;
+    if(this.user ==undefined){
+      this.router.navigate([""]);
+    }    
   }
 
   ngOnInit(): void {
@@ -41,25 +45,23 @@ export class ForumComponent implements OnInit {
     this.chatsToDisplay = this.chatsAux;
     this.chatsToDisplay = this.chats.filter(item =>
       item.title.toLowerCase().includes(this.filtro.toLowerCase())
-  ).splice(0,4);
+  ).splice(0,3);
   }
   onChangePage(page){
+    this.pages=page
     this.chatsToDisplay= Array.from(this.chats);
     var index = page.pageIndex*4;
-    if(index+3>this.chatsToDisplay.length){
-      this.chatsToDisplay = this.chatsToDisplay.splice(index,index+3); 
-    }
-    else if(index+2>this.chatsToDisplay.length){
+    if(index+2>this.chatsToDisplay.length){
       this.chatsToDisplay = this.chatsToDisplay.splice(index,index+2); 
     }
     else if(index+1>this.chatsToDisplay.length){
       this.chatsToDisplay =this.chatsToDisplay.splice(index,index+1); 
     }else{
-      this.chatsToDisplay =this.chatsToDisplay.splice(index,index+4); 
+      this.chatsToDisplay =this.chatsToDisplay.splice(index,index+3); 
     }
   }
   clickOnChat(chat){
-    this.router.navigate(["forum/chat"],{state:{chat:chat,user:this.user}});   
+    this.router.navigate(["forum/chat/"+chat.id],{state:{chat:chat,user:this.user}});   
   }
   createNewChat(){
     
@@ -75,4 +77,24 @@ export class ForumComponent implements OnInit {
        this.getChats()
     });
   }
+
+  
+  deleteChat(id){
+    let dialogRef: MatDialogRef<MatSpinnerComponent> = this.dialog.open(MatSpinnerComponent, {
+      panelClass: 'transparent',
+      disableClose: true
+    });
+    this.chatService.deleteChatMessage(id).subscribe(()=>{
+      dialogRef.close();
+      var index = this.chats.map(function(item) {
+        return item.Id
+      }).indexOf(id);
+    this.chats.splice(index, 1);
+    var page:any ={};
+    page.pageIndex = 0;
+      this.onChangePage(this.pages==null?page:this.pages);
+      this.filtro ="";
+    },error=>{ dialogRef.close();});
+  };
+  
 }

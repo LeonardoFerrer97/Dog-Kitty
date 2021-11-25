@@ -20,4 +20,10 @@ export class ChatService {
   public createChatMessage(chatMessage: ChatMessages){
     return this.httpClient.post(`${this.apiURL}/message`,chatMessage);
   }
+  public deleteChatMessage(id){ 
+    return this.httpClient.delete(`${this.apiURL}/message/${id}`);
+  }
+  public deleteChat(id){ 
+    return this.httpClient.delete(`${this.apiURL}/${id}`);
+  }
 }

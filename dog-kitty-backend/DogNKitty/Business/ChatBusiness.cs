@@ -68,6 +68,7 @@ namespace Business
 
         public void DeleteChatById(int Id)
         {
+            chatMessageRepository.Remove(new { Chat_id = Id });
             chatRepository.Remove(new { Id });
         }
 
@@ -79,6 +80,10 @@ namespace Business
         public int InsertChatMessage(ChatMessagesDto Message)
         {
             return chatMessageRepository.Add(chatMessagemapper.DtoToEntity(Message));
+        }
+        public void DeleteChatMessage(int id)
+        {
+            chatMessageRepository.Remove(new { id });
         }
 
 
