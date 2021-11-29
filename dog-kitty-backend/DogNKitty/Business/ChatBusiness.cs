@@ -32,23 +32,12 @@ namespace Business
             return avaliacoesChat;
         }
 
-        public ChatDto GetChatByDoacaoId(int CursoIdAvaliacao)
-        {
-            object parameters = new { CursoIdAvaliacao };
-            Chat chats = chatRepository.GetData("", parameters).FirstOrDefault();
-            return mapper.EntityToDto(chats);
-        }
-        
-
-        public ChatDto GetFromTitle(string title)
-        {
-            object parameters = new { title };
-            Chat chats = chatRepository.GetData("", parameters).FirstOrDefault();
-            return mapper.EntityToDto(chats);
-        }
-
         public ChatDto GetChatById(int Id)
         {
+            if (Id == 0)
+            {
+                throw new Exception("Parametro nao foi achado");
+            }
             object parameters = new { Id };
             Chat chat = chatRepository.GetData("", parameters).FirstOrDefault();
 
@@ -57,17 +46,20 @@ namespace Business
 
         public int UpdateChat(ChatDto Chat)
         {
+            if (Chat == null)
+            {
+                throw new Exception("Parametro nao pode ser nulo");
+            }
             return chatRepository.InstertOrUpdate(mapper.DtoToEntity(Chat), new { DoacaoId = Chat.Id });
-        }
-
-        public void DeleteDoacaoById(int DoacaoId)
-        {
-            chatRepository.Remove(new { DoacaoId });
         }
 
 
         public void DeleteChatById(int Id)
         {
+            if (Id == 0)
+            {
+                throw new Exception("Parametro nao foi achado");
+            }
             chatMessageRepository.Remove(new { Chat_id = Id });
             chatRepository.Remove(new { Id });
         }
@@ -75,14 +67,26 @@ namespace Business
 
         public int InsertChat(List<ChatDto> Chat)
         {
+            if (Chat == null)
+            {
+                throw new Exception("Parametro nao pode ser nulo");
+            }
             return chatRepository.Add(mapper.ListDtoToListEntity(Chat));
         }
         public int InsertChatMessage(ChatMessagesDto Message)
         {
+            if (Message == null)
+            {
+                throw new Exception("Parametro nao pode ser nulo");
+            }
             return chatMessageRepository.Add(chatMessagemapper.DtoToEntity(Message));
         }
         public void DeleteChatMessage(int id)
         {
+            if (id == 0)
+            {
+                throw new Exception("Parametro nao foi achado");
+            }
             chatMessageRepository.Remove(new { id });
         }
 

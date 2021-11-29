@@ -37,6 +37,10 @@ namespace Business
 
         public UsuarioDto GetUsuarioById(int Id)
         {
+            if (Id == 0)
+            {
+                throw new Exception("Parametro nao foi achado");
+            }
             object parameters = new { Id };
             Usuario usuario = usuarioRepository.GetData( parameters).FirstOrDefault();
             if (usuario == null)
@@ -48,6 +52,10 @@ namespace Business
         
         public UsuarioDto GetUsuarioByEmail(string Email)
         {
+            if (Email == "")
+            {
+                throw new Exception("Parametro nao pode ser nulo");
+            }
             object parameters = new { Email };
             Usuario usuario = usuarioRepository.GetData(parameters).FirstOrDefault();
             if(usuario == null)
@@ -58,11 +66,19 @@ namespace Business
         }
         public int UpdateUsuario(UsuarioDto Usuario)
         {
+            if (Usuario == null)
+            {
+                throw new Exception("Parametro nao pode ser nulo");
+            }
             return usuarioRepository.InstertOrUpdate(mapper.DtoToEntity(Usuario), new { email = Usuario.Email });
         }
 
         public void DeleteUsuarioById(int Id)
         {
+            if (Id == 0)
+            {
+                throw new Exception("Parametro nao foi achado");
+            }
             chatMessagesRepository.Remove(new { usuario_id = Id });
             chatRepository.Remove(new { usuario_id = Id });
             var doacoes = doacaoRepository.GetData(new { usuario_id = Id });
@@ -80,6 +96,10 @@ namespace Business
 
         public int InsertUsuario(UsuarioDto Usuario)
         {
+            if (Usuario == null)
+            {
+                throw new Exception("Parametro nao pode ser nulo");
+            }
             return usuarioRepository.Add(mapper.DtoToEntity(Usuario));
         }
 

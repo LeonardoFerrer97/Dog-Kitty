@@ -29,6 +29,11 @@ namespace Business
 
         public int InsertRaca(RacaDto Raca)
         {
+
+            if (Raca == null)
+            {
+                throw new Exception("Parametro nao pode ser nulo");
+            }
             return racaRepository.Add(mapper.DtoToEntity(Raca));
         }
 

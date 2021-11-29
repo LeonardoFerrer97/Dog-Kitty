@@ -35,6 +35,10 @@ namespace Business
 
         public List<AnimalDto> GetAllAnimaisByFilter(int id)
         {
+            if(id == 0 )
+            {
+                throw new Exception("Parametro nao foi achado");
+            }
             object parameters = new { id };
             IEnumerable<Animal> doacoes = animalRepository.GetData(AnimalQueries.GET_ANIMAL_BY_ID, parameters);
             return mapper.ListEntityToListDto(doacoes.ToList());
@@ -42,6 +46,10 @@ namespace Business
 
         public AnimalDto GetAnimalById(int id)
         {
+            if (id == 0)
+            {
+                throw new Exception("Parametro nao foi achado");
+            }
             Animal animals = animalRepositoryCustom.GetAnimalById(id);
 
             AnimalDto animal = mapper.EntityToDto(animals);
@@ -50,17 +58,30 @@ namespace Business
 
         public int UpdateAnimal(AnimalDto Animal)
         {
+            if (Animal == null)
+            {
+                throw new Exception("Parametro nao pode ser nulo");
+            }
             return animalRepository.InstertOrUpdate(mapper.DtoToEntity(Animal), new { id = Animal.Id });
         }
 
         public void DeleteAnimalById(int id)
         {
+
+            if (id == 0)
+            {
+                throw new Exception("Parametro nao foi achado");
+            }
             animalRepository.Remove(new { id });
         }
 
 
         public int InsertAnimal(List<AnimalDto> Animal)
         {
+            if (Animal == null)
+            {
+                throw new Exception("Parametro nao pode ser nulo");
+            }
             return animalRepository.Add(mapper.ListDtoToListEntity(Animal));
         }
 

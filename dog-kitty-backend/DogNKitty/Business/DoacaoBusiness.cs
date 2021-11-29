@@ -42,6 +42,10 @@ namespace Business
 
         public int UpdateDoacao(DoacaoDto Doacao)
         {
+            if (Doacao == null)
+            {
+                throw new Exception("Parametro nao foi achado");
+            }
             animalCustomRepository.InstertOrUpdate(animalMapper.DtoToEntity(Doacao.Animal), new { id= Doacao.Animal.Id});
             return doacaoRepository.InstertOrUpdate(mapper.DtoToEntity(Doacao), new { id = Doacao.Id });
         }
@@ -49,6 +53,10 @@ namespace Business
 
         public void DeleteDoacaoById(DoacaoDto doacao)
         {
+            if (doacao == null)
+            {
+                throw new Exception("Parametro nao pode ser nulo");
+            }
             if (doacao.Animal.Foto != null)
             {
                 foreach (var foto in doacao.Animal.Foto)
@@ -63,6 +71,10 @@ namespace Business
 
         public int InsertDoacao(DoacaoDto Doacao)
         {
+            if (Doacao == null)
+            {
+                throw new Exception("Parametro nao pode ser nulo");
+            }
             var doacaoId = doacaoRepositoryCustom.InsertDoacao(mapper.DtoToEntity(Doacao));
             var animalId = animalRepository.InsertAnimal(animalMapper.DtoToEntity(Doacao.Animal),doacaoId);
             List<Foto> fotos = fotoMapper.ListDtoToListEntity(Doacao.Animal.Foto);
