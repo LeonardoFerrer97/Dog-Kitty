@@ -1,4 +1,4 @@
-import { ChatMessages } from "./ChatMessages";
+import { ChatMessages } from "./chatMessages";
 
 export class Chat {
     

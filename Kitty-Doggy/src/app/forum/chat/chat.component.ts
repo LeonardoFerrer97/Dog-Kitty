@@ -3,14 +3,14 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { MatSpinnerComponent } from 'src/app/mat-spinner/mat-spinner.component';
 import { ChatService } from 'src/app/services/chat.service';
-import { ChatMessages } from 'src/domain/ChatMessages';
+import { ChatMessages } from 'src/domain/chatMessages';
 import { Usuario } from 'src/domain/usuario';
 
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.css']
-})
+}) 
 export class ChatComponent implements OnInit {
   messagesToDisplay:any;
   newMessage:string;
