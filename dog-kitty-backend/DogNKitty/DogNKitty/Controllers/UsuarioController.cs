@@ -21,7 +21,7 @@ namespace DogNKitty.Controllers
         public UsuarioController(IOptions<ConnectionStrings> config)
         {
             this.connection = config.Value.DbConnection;
-            usuarioBusiness = new UsuarioBusiness(connection);
+            usuarioBusiness = new UsuarioBusiness(connection,null,null,null,null,null);
         }
 
 

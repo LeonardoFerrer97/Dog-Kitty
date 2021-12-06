@@ -6,30 +6,41 @@ using Entity;
 using Repository;
 using Business.Mappers;
 using Utils.Queries;
+using IRepository;
+
 namespace Business
 {
     public class ChatBusiness
     {
         private readonly ChatMapper mapper = new ChatMapper();
         private readonly ChatMessagesMapper chatMessagemapper = new ChatMessagesMapper();
-        private readonly Repository<Chat> chatRepository;
-        private readonly Repository<ChatMessages> chatMessageRepository;
-        private readonly ChatRepository chatRepositoryCustom;
+        private readonly IRepository<Chat> chatRepository;
+        private readonly IRepository<ChatMessages> chatMessageRepository;
+        private readonly IChatRepository chatRepositoryCustom;
 
-        public ChatBusiness(string connection)
+        public ChatBusiness(string connection, IRepository<Chat> _chatRepository, IRepository<ChatMessages> _chatMessageRepository, IChatRepository _chatRepositoryCustom)
         {
-            chatRepository = new Repository<Chat>(connection);
-            chatRepositoryCustom = new ChatRepository(connection);
-            chatMessageRepository = new Repository<ChatMessages>(connection);
+            if(_chatRepository == null)
+            {
+                chatRepository = new Repository<Chat>(connection);
+                chatRepositoryCustom = new ChatRepository(connection);
+                chatMessageRepository = new Repository<ChatMessages>(connection);
+            }
+            else
+            {
+                chatRepository = _chatRepository;
+                chatRepositoryCustom = _chatRepositoryCustom;
+                chatMessageRepository = _chatMessageRepository;
+            }
         }
 
 
         public List<ChatDto> GetAllChat(string title)
         {
-            IEnumerable<Chat> doacaos = chatRepositoryCustom.GetChats(title);
+            IEnumerable<Chat> chats = chatRepositoryCustom.GetChats(title);
 
-            List<ChatDto> avaliacoesChat = mapper.ListEntityToListDto(doacaos);
-            return avaliacoesChat;
+            List<ChatDto> chat = mapper.ListEntityToListDto(chats);
+            return chat;
         }
 
         public ChatDto GetChatById(int Id)
@@ -58,7 +69,7 @@ namespace Business
         {
             if (Id == 0)
             {
-                throw new Exception("Parametro nao foi achado");
+                throw new Exception("Parametro nao pode ser nulo");
             }
             chatMessageRepository.Remove(new { Chat_id = Id });
             chatRepository.Remove(new { Id });

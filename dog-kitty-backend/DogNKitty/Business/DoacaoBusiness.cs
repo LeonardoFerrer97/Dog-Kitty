@@ -14,21 +14,32 @@ namespace Business
     public class DoacaoBusiness
     {
         private readonly DoacaoMappers mapper = new DoacaoMappers();
-        private readonly Repository<Doacao> doacaoRepository;
-        private readonly Repository<Animal> animalCustomRepository;
+        private readonly IRepository<Doacao> doacaoRepository;
+        private readonly IRepository<Animal> animalCustomRepository;
         private readonly AnimalMapper animalMapper = new AnimalMapper();
         private readonly FotoMapper fotoMapper = new FotoMapper();
-        private readonly Repository<Foto> fotoRepository;
+        private readonly IRepository<Foto> fotoRepository;
         private readonly IDoacaoRepository doacaoRepositoryCustom;
         private readonly IAnimalRepository animalRepository;
 
-        public DoacaoBusiness(string connection)
+        public DoacaoBusiness(string connection, IRepository<Doacao> _doacaoRepository, IRepository<Animal> _animalCustomRepository, IRepository<Foto> _fotoRepository, IDoacaoRepository _doacaoRepositoryCustom, IAnimalRepository _animalRepository)
         {
-            doacaoRepository = new Repository<Doacao>(connection);
-            fotoRepository = new Repository<Foto>(connection);
-            animalCustomRepository = new Repository<Animal>(connection);
-            doacaoRepositoryCustom = new DoacaoRepository(connection);
-            animalRepository = new AnimalRepository(connection); 
+            if (_doacaoRepository != null)
+            {
+                doacaoRepository = _doacaoRepository;
+                animalCustomRepository = _animalCustomRepository;
+                fotoRepository = _fotoRepository;
+                doacaoRepositoryCustom = _doacaoRepositoryCustom;
+                animalRepository = _animalRepository;
+            }
+            else
+            {
+                doacaoRepository = new Repository<Doacao>(connection);
+                fotoRepository = new Repository<Foto>(connection);
+                animalCustomRepository = new Repository<Animal>(connection);
+                doacaoRepositoryCustom = new DoacaoRepository(connection);
+                animalRepository = new AnimalRepository(connection);
+            }
         }
 
 
@@ -36,15 +47,15 @@ namespace Business
         {
             IEnumerable<Doacao> doacaos = doacaoRepositoryCustom.GetDoacao(status, localizacao,raca,porte,sexo,animal,usuarioId);
 
-            List<DoacaoDto> avaliacoesUsuario = mapper.ListEntityToListDto(doacaos);
-            return avaliacoesUsuario;
+            List<DoacaoDto> doacaoRetorno = mapper.ListEntityToListDto(doacaos);
+            return doacaoRetorno;
         }
 
         public int UpdateDoacao(DoacaoDto Doacao)
         {
             if (Doacao == null)
             {
-                throw new Exception("Parametro nao foi achado");
+                throw new Exception("Parametro nao pode ser nulo");
             }
             animalCustomRepository.InstertOrUpdate(animalMapper.DtoToEntity(Doacao.Animal), new { id= Doacao.Animal.Id});
             return doacaoRepository.InstertOrUpdate(mapper.DtoToEntity(Doacao), new { id = Doacao.Id });

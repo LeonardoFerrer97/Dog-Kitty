@@ -57,6 +57,7 @@ namespace Repository
             partsQryGenerator = new PartsQryGenerator<TEntity>(ParameterIdentified);
             identityInspector = new IDentityInspector<TEntity>(conn);
         }
+        public Repository() { }
 
         #region Creates Qries
 

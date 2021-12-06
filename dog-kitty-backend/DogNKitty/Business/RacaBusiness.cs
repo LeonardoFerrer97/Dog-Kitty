@@ -6,25 +6,34 @@ using Entity;
 using Repository;
 using Business.Mappers;
 using Utils.Queries;
+using IRepository;
+
 namespace Business
 {
     public class RacaBusiness
     {
-        private readonly RacaMapper mapper = new RacaMapper();
-        private readonly Repository<Raca> racaRepository;
+        public readonly RacaMapper mapper = new RacaMapper();
+        private readonly IRepository<Raca> racaRepository;
 
-        public RacaBusiness(string connection)
+        public RacaBusiness(string connection,IRepository<Raca> repository)
         {
-            racaRepository = new Repository<Raca>(connection);
-        }
+            if(repository == null)
+            {
+                racaRepository = new Repository<Raca>(connection);
+            }
+            else
+            {
 
+                racaRepository = repository;
+            }
+        }
 
         public List<RacaDto> GetAllRaca()
         {
-            IEnumerable<Raca> doacaos = racaRepository.All();
+            IEnumerable<Raca> racaEntity = racaRepository.All();
 
-            List<RacaDto> avaliacoesRaca = mapper.ListEntityToListDto(doacaos);
-            return avaliacoesRaca;
+            List<RacaDto> racas = mapper.ListEntityToListDto(racaEntity);
+            return racas;
         }
 
         public int InsertRaca(RacaDto Raca)

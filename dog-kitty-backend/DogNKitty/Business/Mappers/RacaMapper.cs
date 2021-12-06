@@ -8,39 +8,52 @@ namespace Business.Mappers
     {
         public RacaDto EntityToDto(Raca raca)
         {
-            return new RacaDto()
+            if (raca != null)
             {
-                Id = raca.Id,
-                Nome = raca.Nome
-            };
+                return new RacaDto()
+                {
+                    Id = raca.Id,
+                    Nome = raca.Nome
+                };
+            }return null;
         }
         public List<RacaDto> ListEntityToListDto(IEnumerable<Raca> racas)
         {
             List<RacaDto> dtos = new List<RacaDto>();
-            foreach (var raca in racas)
+            if (racas != null)
             {
-                dtos.Add(EntityToDto(raca));
+                foreach (var raca in racas)
+                {
+                    dtos.Add(EntityToDto(raca));
 
+                }
             }
             return dtos;
         }
 
         public Raca DtoToEntity(RacaDto raca)
         {
-            return new Raca()
+            if (raca != null)
             {
-                Id = raca.Id,
-                Nome = raca.Nome
-            };
+                return new Raca()
+                {
+                    Id = raca.Id,
+                    Nome = raca.Nome
+                };
+            }return null;
         }
 
         public List<Raca> ListDtoToListEntity(IEnumerable<RacaDto> racas)
         {
             List<Raca> dtos = new List<Raca>();
-            foreach (var raca in racas)
-            {
-                dtos.Add(DtoToEntity(raca));
 
+            if (racas != null)
+            {
+                foreach (var raca in racas)
+                {
+                    dtos.Add(DtoToEntity(raca));
+
+                }
             }
             return dtos;
         }

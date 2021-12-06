@@ -22,7 +22,7 @@ namespace DogNKitty.Controllers
         public RacaController(IOptions<ConnectionStrings> config)
         {
             this.connection = config.Value.DbConnection;
-            racaBusiness = new RacaBusiness(connection);
+            racaBusiness = new RacaBusiness(connection,null);
         }
 
 

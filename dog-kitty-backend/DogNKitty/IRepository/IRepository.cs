@@ -10,6 +10,7 @@ namespace IRepository
         Task<IEnumerable<TEntity>> AllAsync();
         IEnumerable<TEntity> GetData(string qry, object parameters);
         Task<IEnumerable<TEntity>> GetDataAsync(string qry, object parameters);
+        IEnumerable<TEntity> GetData(object filter);
         TEntity Find(object pksFields);
         Task<TEntity> FindAsync(object pksFields);
         int Add(TEntity entity);

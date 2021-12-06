@@ -21,7 +21,7 @@ namespace DogNKitty.Controllers
         public ChatController(IOptions<ConnectionStrings> config)
         {
             this.connection = config.Value.DbConnection;
-            chatBusiness = new ChatBusiness(connection);
+            chatBusiness = new ChatBusiness(connection,null,null,null);
         }
 
 

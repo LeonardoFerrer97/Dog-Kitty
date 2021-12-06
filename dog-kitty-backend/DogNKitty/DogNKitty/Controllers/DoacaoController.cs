@@ -22,7 +22,7 @@ namespace DogNKitty.Controllers
         public DoacaoController(IOptions<ConnectionStrings> config)
         {
             this.connection = config.Value.DbConnection;
-            doacaoBusiness = new DoacaoBusiness(connection);
+            doacaoBusiness = new DoacaoBusiness(connection,null,null,null,null,null);
         }
 
 

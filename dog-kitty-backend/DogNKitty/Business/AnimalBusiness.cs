@@ -15,13 +15,21 @@ namespace Business
     public class AnimalBusiness
     {
         private readonly AnimalMapper mapper = new AnimalMapper();
-        private readonly Repository<Animal> animalRepository;
+        private readonly IRepository<Animal> animalRepository;
         private readonly IAnimalRepository animalRepositoryCustom;
 
-        public AnimalBusiness(string connection)
+        public AnimalBusiness(string connection,IRepository<Animal> _animalRepository, IAnimalRepository _animalRepositoryCustom)
         {
-            animalRepository = new Repository<Animal>(connection);
-            animalRepositoryCustom = new AnimalRepository(connection);
+            if (_animalRepository == null)
+            {
+                animalRepository = new Repository<Animal>(connection);
+                animalRepositoryCustom = new AnimalRepository(connection);
+            }
+            else
+            {
+                animalRepository = _animalRepository;
+                animalRepositoryCustom = _animalRepositoryCustom;
+            }
         }
 
 
@@ -29,8 +37,8 @@ namespace Business
         {
             IEnumerable<Animal> animals = animalRepositoryCustom.GetAnimal(nome, doacaoId,raca_id,status, peso,idade, sexo,porte, tipoAnimal);
 
-            List<AnimalDto> avaliacoesUsuario = mapper.ListEntityToListDto(animals);
-            return avaliacoesUsuario;
+            List<AnimalDto> animal = mapper.ListEntityToListDto(animals);
+            return animal;
         }
 
         public List<AnimalDto> GetAllAnimaisByFilter(int id)

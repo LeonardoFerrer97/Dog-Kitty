@@ -8,39 +8,51 @@ namespace Business.Mappers
     {
         public FotoDto EntityToDto(Foto foto)
         {
-            return new FotoDto()
+            if (foto != null)
             {
-                Id = foto.Id,
-                Imagem = foto.Imagem
-            };
+                return new FotoDto()
+                {
+                    Id = foto.Id,
+                    Imagem = foto.Imagem
+                };
+            }return null;
         }
         public List<FotoDto> ListEntityToListDto(IEnumerable<Foto> fotos)
         {
             List<FotoDto> dtos = new List<FotoDto>();
-            foreach (var foto in fotos)
+            if (fotos != null)
             {
-                dtos.Add(EntityToDto(foto));
+                foreach (var foto in fotos)
+                {
+                    dtos.Add(EntityToDto(foto));
 
+                }
             }
             return dtos;
         }
 
         public Foto DtoToEntity(FotoDto foto)
+    {
+        if (foto != null)
         {
             return new Foto()
             {
                 Id = foto.Id,
                 Imagem = foto.Imagem
             };
+        }return null;
         }
 
         public List<Foto> ListDtoToListEntity(IEnumerable<FotoDto> fotos)
         {
-            List<Foto> dtos = new List<Foto>();
-            foreach (var Foto in fotos)
+            List<Foto> dtos = new List<Foto>(); 
+            if (fotos != null)
             {
-                dtos.Add(DtoToEntity(Foto));
+                foreach (var Foto in fotos)
+                {
+                    dtos.Add(DtoToEntity(Foto));
 
+                }
             }
             return dtos;
         }
