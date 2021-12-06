@@ -64,7 +64,6 @@ export class ForumComponent implements OnInit {
     this.router.navigate(["forum/chat/"+chat.id],{state:{chat:chat,user:this.user}});   
   }
   createNewChat(){
-    
     var dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;        
@@ -84,7 +83,7 @@ export class ForumComponent implements OnInit {
       panelClass: 'transparent',
       disableClose: true
     });
-    this.chatService.deleteChatMessage(id).subscribe(()=>{
+    this.chatService.deleteChat(id).subscribe(()=>{
       dialogRef.close();
       var index = this.chats.map(function(item) {
         return item.Id
@@ -94,7 +93,7 @@ export class ForumComponent implements OnInit {
     page.pageIndex = 0;
       this.onChangePage(this.pages==null?page:this.pages);
       this.filtro ="";
-    },error=>{ dialogRef.close();});
+    },error=>{  dialogRef.close();});
   };
   
 }

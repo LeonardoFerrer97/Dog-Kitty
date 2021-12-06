@@ -8,8 +8,8 @@
         </mat-form-field>
     <div   class="chat" *ngFor="let chat of chatsToDisplay;let indexOfelement=index;">
         <p (click)="clickOnChat(chat)" class="title">{{chat.title}}</p>        
-        <button class="icon" *ngIf="(chat.usuario.id==user.id ||user.isAdmin) && chat.id !==null" mat-icon-button (click)="deleteChat(chat.id)">
-            <mat-icon>delete_forever</mat-icon>
+        <button class="icon" *ngIf="(chat.usuario.id==user.id ||user.isAdmin) && chat.id !==null" mat-icon-button >
+            <mat-icon (click)="deleteChat(chat.id)">delete_forever</mat-icon>
       </button>
     </div>
     

@@ -12,6 +12,7 @@ export class ChatService {
   constructor(private httpClient: HttpClient) {};
   public createChat(chat: Chat){
     var listChats = Array<Chat>();
+    listChats.push(chat);
     return this.httpClient.post(`${this.apiURL}`,listChats);
   }
   public getChats(){
